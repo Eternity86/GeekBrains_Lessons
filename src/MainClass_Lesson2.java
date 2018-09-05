@@ -63,6 +63,13 @@ public class MainClass_Lesson2 {
         //=====================================================================================================================================================
 
         /* 8. ***** Создать матрицу размерностью m*n и заполнить её по спирали числами от 1 до (m*n) с шагом 1, начиная с крайнего верхнего левого положения (0, 0)*/
+        int m8 = 5;
+        int n8 = 7;
+        int[][] array8 = new int[m8][n8];
+        arraySpiralFilling(array8);
+
+        //=====================================================================================================================================================
+
     }
 
     public static void printArray (int[] array) {
@@ -84,12 +91,7 @@ public class MainClass_Lesson2 {
 
     public static void invertArray (int[] array) {
         for (int i = 0; i < array.length; i++) {
-            array[i] = array[i] == 0 ? 1 : 0;           // максимально упростили запись инвертирования значения
-            /*if (array[i] == 0) {
-                array[i] = 1;
-            } else if (array[i] == 1) {                // из условия задачи данная проверка не нужна, но лишняя "защита от дурака" не помешает никогда
-                array[i] = 0;
-            }*/
+            array[i] = array[i] == 0 ? 1 : 0;           // максимально упростили запись инвертирования значения, используя тернарный оператор
         }
     }
 
@@ -138,11 +140,16 @@ public class MainClass_Lesson2 {
     public static boolean checkBalance(int[] array) {
         if (array[0] == (array[1] + /*... +*/ array[array.length - 1]));
         if ((array[0] + array[1]) == (array[2] + /*... +*/  array[array.length - 1]));
-        if ((array[0] + array[1] + array[2]) == (array[3 + /*... +*/ array[array.length - 1]]));
+        if ((array[0] + array[1] + array[2]) == (array[3] + /*... +*/ array[array.length - 1]));
         return true;
     }
 
     public static void arrayShift(int[] array) {
 
     }
+
+    public static void arraySpiralFilling(int[][] array) {
+
+    }
+
 }
