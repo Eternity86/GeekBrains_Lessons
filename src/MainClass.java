@@ -1,5 +1,3 @@
-package Lesson1;
-
 public class MainClass {
     public static void main(String[] args) {
 
@@ -18,7 +16,7 @@ public class MainClass {
         boolean boolFalse = false;
 
 
-        System.out.println(getSolution(5, 6, 8, i));
+        System.out.println(getSolution(b, 6, 8, i));
 
         System.out.println(getSolution2Digits(5, 8));
         System.out.println(getSolution2Digits(9, 15));
