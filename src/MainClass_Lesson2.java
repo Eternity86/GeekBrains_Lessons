@@ -5,12 +5,8 @@ public class MainClass_Lesson2 {
         /* 1. Задать целочисленный массив, состоящий из элементов 0 и 1. Например: [ 1, 1, 0, 0, 1, 0, 1, 1, 0, 0 ].
         С помощью цикла и условия заменить 0 на 1, 1 на 0. */
         int[] arrInt = {1, 1, 0, 0, 1, 0, 1, 1, 0, 0 };
+        invertArray(arrInt);                        // т.к. массив передаётся по ссылке, то после работы внутренней метода изменяются значения переданного массива, хоть метод ничего и не возвращает
         for (int i = 0; i < arrInt.length; i++) {
-            if (arrInt[i] == 0) {
-                arrInt[i] = 1;
-            } else if (arrInt[i] == 1) {                // из условия задачи данная проверка не нужна, но лишняя "защита от дурака" не помешает никогда
-                arrInt[i] = 0;
-            }
             System.out.print(arrInt[i] + " ");
         }
         System.out.println();
@@ -18,9 +14,10 @@ public class MainClass_Lesson2 {
         //=====================================================================================================================================================
 
         /* 2. Задать пустой целочисленный массив размером 8. С помощью цикла заполнить его значениями 0 3 6 9 12 15 18 21. */
-        int[] arrayInt = new int[8];
-        for (int i = 0, j = 0; i < arrayInt.length; i++, j+=3) {
-            arrayInt[i] = j;
+        int m2 = 8;
+        int[] arrayInt = new int[m2];
+        fillArrayMultipleOfThree(arrayInt);
+        for (int i = 0; i < arrayInt.length; i++) {
             System.out.print(arrayInt[i] + " ");
         }
         System.out.println();
@@ -29,8 +26,8 @@ public class MainClass_Lesson2 {
 
         /* 3. Задать массив [ 1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1 ] пройти по нему циклом, и числа меньшие 6 умножить на 2. */
         int[] array = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
+        ifLesserSixMultipleTwo(array);
         for (int i = 0; i < array.length; i++) {
-            if (array[i] < 6) array[i] *= 2;
             System.out.print(array[i] + " ");
         }
         System.out.println();
@@ -39,19 +36,12 @@ public class MainClass_Lesson2 {
 
         /* 4. Создать квадратный двумерный целочисленный массив (количество строк и столбцов одинаковое), и с помощью цикла(-ов)
         заполнить его диагональные элементы единицами. */
-        int m = 9, n = 9;                             // размерность двумерного массива-матрицы m*n
-        int[][] matrix = new int[m][n];
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (i == j || i == ((m - 1) - j)) {     // через объединение условий мы не заносим дважды в центр массива единицу, когда размерность массива нечётная
-                    matrix[i][j] = 1;
-                } else {
-                    matrix[i][j] = 0;                   // по умолчанию значения типа int всё равно инициализируются нулём
-                }
-            }
-        }
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
+        int m4 = 9;                              // размерность двумерного массива-матрицы m*n
+        int n4 = m4;                              // двумерный массив точно будет квадратным
+        int[][] matrix = new int[m4][n4];
+        fillUpWithUnitsDiagonally(matrix, 1);
+        for (int i = 0; i < m4; i++) {
+            for (int j = 0; j < n4; j++) {
                 System.out.print(matrix[i][j] + " ");
             }
             System.out.println();
@@ -60,15 +50,9 @@ public class MainClass_Lesson2 {
         //=====================================================================================================================================================
 
         /* 5. ** Задать одномерный массив и найти в нем минимальный и максимальный элементы (без помощи интернета). */
-        int m1 = 10;                                             // размерность массива
-        int[] array1Dimension = new int[m1];
-        int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;   // минимальному значению присваиваем максимальное значение Integer (класс-обёртка для int), а максимальному - наоборот минимальное
-        for (int i = 0; i < array1Dimension.length; i++) {
-            if (array1Dimension[i] > max) max = array1Dimension[i];
-            if (array1Dimension[i] < min) min = array1Dimension[i];
-        }
-        System.out.println(min + " " + max);
-
+        int m5 = 10;                                             // размерность массива
+        int[] array1Dimension = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8};
+        System.out.println("min = " + getMin(array1Dimension) + ", max = " + getMax(array1Dimension));
 
         //=====================================================================================================================================================
 
@@ -76,21 +60,73 @@ public class MainClass_Lesson2 {
         метод должен вернуть true если в массиве есть место, в котором сумма левой и правой части массива равны.
         Примеры: checkBalance([1, 1, 1, || 2, 1]) → true, checkBalance ([2, 1, 1, 2, 1]) → false, checkBalance ([10, || 10]) → true,
         граница показана символами ||, эти символы в массив не входят. */
-        int m2 = 6;
-        int[] arr2 = new int[m2];
-        System.out.println(checkBalance(arr2));
+        int m6 = 6;
+        int[] arr6 = new int[m6];
+        System.out.println(checkBalance(arr6));
 
 
         //=====================================================================================================================================================
 
         /* 7. **** Написать метод, которому на вход подается одномерный массив и число n (может быть положительным, или отрицательным),
         при этом метод должен сместить все элементы массива на n позиций. Для усложнения задачи нельзя пользоваться вспомогательными массивами. */
-        int m3 = 6;
-        int[] arr3 = new int[m3];
-        arrayShift(arr3);
+        int m7 = 6;
+        int[] arr7 = new int[m7];
+        arrayShift(arr7);
 
 
         //=====================================================================================================================================================
+
+        /* 8. ***** Создать матрицу размерностью m*n и заполнить её по спирали числами от 1 до (m*n) с шагом 1, начиная с крайнего верхнего левого положения (0, 0)*/
+    }
+
+    public static void invertArray (int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == 0) {
+                array[i] = 1;
+            } else if (array[i] == 1) {                // из условия задачи данная проверка не нужна, но лишняя "защита от дурака" не помешает никогда
+                array[i] = 0;
+            }
+        }
+    }
+
+    public static void  fillArrayMultipleOfThree(int[] array) {
+        for (int i = 0, j = 0; i < array.length; i++, j+=3) {
+            array[i] = j;
+        }
+    }
+
+    public static void ifLesserSixMultipleTwo(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] < 6) array[i] *= 2;
+        }
+    }
+
+    public static void fillUpWithUnitsDiagonally(int[][] array, int unitFiller) {
+        int m = array.length, n = array[0].length;      // получаем размерность двумерного массива
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == j || i == ((n - 1) - j)) {     // через объединение условий мы не заносим дважды в центр массива заполнитель, когда размерность массива нечётная
+                    array[i][j] = unitFiller;           // заполняем диагональные элементы переданным заполнителем
+                } else {
+                    array[i][j] = 0;                    // по умолчанию значения типа int всё равно инициализируются нулём, но во избежание сделаем это ещё раз сами
+                }
+            }
+        }
+    }
+
+    public static int getMin(int[] array) {
+        int min = Integer.MAX_VALUE;                // минимальному значению присваиваем максимальное значение Integer (класс-обёртка для примитива int)
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] < min) min = array[i];
+        }
+        return min;
+    }
+    public static int getMax(int[] array) {
+        int max = Integer.MIN_VALUE;                // а максимальному - наоборот минимальное значение Integer
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > max) max = array[i];
+        }
+        return max;
     }
 
     public static boolean checkBalance(int[] array) {
