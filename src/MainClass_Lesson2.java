@@ -6,10 +6,7 @@ public class MainClass_Lesson2 {
         С помощью цикла и условия заменить 0 на 1, 1 на 0. */
         int[] arrInt = {1, 1, 0, 0, 1, 0, 1, 1, 0, 0 };
         invertArray(arrInt);                        // т.к. массив передаётся по ссылке, то после работы внутренней метода изменяются значения переданного массива, хоть метод ничего и не возвращает
-        for (int i = 0; i < arrInt.length; i++) {
-            System.out.print(arrInt[i] + " ");
-        }
-        System.out.println();
+        printArray(arrInt);
 
         //=====================================================================================================================================================
 
@@ -17,35 +14,24 @@ public class MainClass_Lesson2 {
         int m2 = 8;
         int[] arrayInt = new int[m2];
         fillArrayMultipleOfThree(arrayInt);
-        for (int i = 0; i < arrayInt.length; i++) {
-            System.out.print(arrayInt[i] + " ");
-        }
-        System.out.println();
+        printArray(arrayInt);
 
         //=====================================================================================================================================================
 
         /* 3. Задать массив [ 1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1 ] пройти по нему циклом, и числа меньшие 6 умножить на 2. */
         int[] array = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
         ifLesserSixMultipleTwo(array);
-        for (int i = 0; i < array.length; i++) {
-            System.out.print(array[i] + " ");
-        }
-        System.out.println();
+        printArray(array);
 
         //=====================================================================================================================================================
 
         /* 4. Создать квадратный двумерный целочисленный массив (количество строк и столбцов одинаковое), и с помощью цикла(-ов)
         заполнить его диагональные элементы единицами. */
-        int m4 = 9;                              // размерность двумерного массива-матрицы m*n
-        int n4 = m4;                              // двумерный массив точно будет квадратным
+        int m4 = 9;                              // размерность двумерного массива m*n
+        int n4 = 9;
         int[][] matrix = new int[m4][n4];
-        fillUpWithUnitsDiagonally(matrix, 1);
-        for (int i = 0; i < m4; i++) {
-            for (int j = 0; j < n4; j++) {
-                System.out.print(matrix[i][j] + " ");
-            }
-            System.out.println();
-        }
+        fillUpUnitsDiagonally(matrix, 1);
+        printTwoDimensionalArray(matrix);
 
         //=====================================================================================================================================================
 
@@ -79,13 +65,31 @@ public class MainClass_Lesson2 {
         /* 8. ***** Создать матрицу размерностью m*n и заполнить её по спирали числами от 1 до (m*n) с шагом 1, начиная с крайнего верхнего левого положения (0, 0)*/
     }
 
+    public static void printArray (int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public static void printTwoDimensionalArray (int[][] array) {
+        int m = array.length, n = array[0].length;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(array[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
     public static void invertArray (int[] array) {
         for (int i = 0; i < array.length; i++) {
-            if (array[i] == 0) {
+            array[i] = array[i] == 0 ? 1 : 0;           // максимально упростили запись инвертирования значения
+            /*if (array[i] == 0) {
                 array[i] = 1;
             } else if (array[i] == 1) {                // из условия задачи данная проверка не нужна, но лишняя "защита от дурака" не помешает никогда
                 array[i] = 0;
-            }
+            }*/
         }
     }
 
@@ -101,7 +105,7 @@ public class MainClass_Lesson2 {
         }
     }
 
-    public static void fillUpWithUnitsDiagonally(int[][] array, int unitFiller) {
+    public static void fillUpUnitsDiagonally(int[][] array, int unitFiller) {
         int m = array.length, n = array[0].length;      // получаем размерность двумерного массива
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -114,6 +118,8 @@ public class MainClass_Lesson2 {
         }
     }
 
+    // придерживаемся приципа KISS и делаем так, чтобы каждый метод отвечал за выполнение ТОЛЬКО одной задачи:
+    // поиск минимального и максимального значений разносим по разным методам
     public static int getMin(int[] array) {
         int min = Integer.MAX_VALUE;                // минимальному значению присваиваем максимальное значение Integer (класс-обёртка для примитива int)
         for (int i = 0; i < array.length; i++) {
@@ -130,8 +136,9 @@ public class MainClass_Lesson2 {
     }
 
     public static boolean checkBalance(int[] array) {
-        if (array[0] == (array[1] + array[array.length - 1]));
-        if ((array[0] + array[1]) == (array[2] + array[array.length - 1]));
+        if (array[0] == (array[1] + /*... +*/ array[array.length - 1]));
+        if ((array[0] + array[1]) == (array[2] + /*... +*/  array[array.length - 1]));
+        if ((array[0] + array[1] + array[2]) == (array[3 + /*... +*/ array[array.length - 1]]));
         return true;
     }
 
