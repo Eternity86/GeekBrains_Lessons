@@ -11,6 +11,7 @@ public class MainClass {
         double d = 12.3;            // 8 байт
 
         char c = 'c';               // 2 байта - отдельный символ в UTF-16
+        char c2 = 'b';
 
         boolean boolTrue = true;    // true или false
         boolean boolFalse = false;
