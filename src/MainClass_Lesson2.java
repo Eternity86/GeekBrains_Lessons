@@ -92,7 +92,7 @@ public class MainClass_Lesson2 {
 
     public static void printArray (int[] array) {
         for (int anArray : array) {
-            System.out.print(anArray + " ");
+            System.out.printf("%d ", anArray);
         }
         System.out.println();
     }
@@ -102,7 +102,7 @@ public class MainClass_Lesson2 {
         int n = array[0].length;
         for (int[] anArray : array) {
             for (int j = 0; j < n; j++) {
-                System.out.print(anArray[j] + " ");
+                System.out.printf("%d ", anArray[j]);
             }
             System.out.println();
         }
