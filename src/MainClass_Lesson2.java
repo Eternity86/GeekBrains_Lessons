@@ -46,10 +46,14 @@ public class MainClass_Lesson2 {
         метод должен вернуть true если в массиве есть место, в котором сумма левой и правой части массива равны.
         Примеры: checkBalance([1, 1, 1, || 2, 1]) → true, checkBalance ([2, 1, 1, 2, 1]) → false, checkBalance ([10, || 10]) → true,
         граница показана символами ||, эти символы в массив не входят. */
-        int m6 = 6;
+        //int m6 = 6;
         //int[] arr6 = new int[m6];
-        int[] arr6 = {10, 10};
-        checkBalance(arr6);
+        int[] arr6_1 = {1, 1, 1, 2, 1};
+        int[] arr6_2 = {2, 1, 1, 2, 1};
+        int[] arr6_3 = {10, 10};
+        System.out.println(checkBalance(arr6_1));
+        System.out.println(checkBalance(arr6_2));
+        System.out.println(checkBalance(arr6_3));
 
         //=====================================================================================================================================================
 
@@ -58,6 +62,7 @@ public class MainClass_Lesson2 {
         int m7 = 6;
         int[] arr7 = new int[m7];
         arrayShift(arr7);
+        //System.out.println(0 % 4);
 
         //=====================================================================================================================================================
 
@@ -112,26 +117,25 @@ public class MainClass_Lesson2 {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (i == j || i == ((n - 1) - j)) {     // через объединение условий мы не заносим дважды в центр массива заполнитель, когда размерность массива нечётная
-                    array[i][j] = unitFiller;           // заполняем диагональные элементы переданным заполнителем, меняем массив на char и можно заполнителем сделать 'X'
+                    array[i][j] = unitFiller;           // заполняем диагональные элементы переданным заполнителем; меняем массив на char и можно заполнителем сделать 'X'
                 } else {
-                    array[i][j] = 0;                    // по умолчанию значения типа int всё равно инициализируются нулём, но во избежание сделаем это ещё раз сами
+                    array[i][j] = 0;                    // по умолчанию значения типа int в переданном массиве всё равно инициализируются нулём, но во избежание сделаем это ещё раз сами
                 }
             }
         }
     }
 
-    // придерживаемся приципа KISS и делаем так, чтобы каждый метод отвечал за выполнение ТОЛЬКО одной задачи:
     // поиск минимального и максимального значений разносим по разным методам
     public static int getMin(int[] array) {
-        int min = Integer.MAX_VALUE;                // минимальному значению присваиваем максимальное значение Integer (класс-обёртка для примитива int)
-        for (int i = 0; i < array.length; i++) {
+        int min = array[0];
+        for (int i = 1; i < array.length; i++) {
             if (array[i] < min) min = array[i];
         }
         return min;
     }
     public static int getMax(int[] array) {
-        int max = Integer.MIN_VALUE;                // а максимальному - наоборот минимальное значение Integer
-        for (int i = 0; i < array.length; i++) {
+        int max = array[0];
+        for (int i = 1; i < array.length; i++) {
             if (array[i] > max) max = array[i];
         }
         return max;
@@ -140,11 +144,9 @@ public class MainClass_Lesson2 {
     public static boolean checkBalance(int[] array) {
         for (int i = 0; i < array.length; i++) {
             if (sumPartOfArray(array, 0, i) == sumPartOfArray(array, i + 1, array.length - 1)) {
-                System.out.println("true");
                 return true;                                    // в случае true по индексам i и i+1 массив разбивается на два равных по сумме значений
             }
         }
-        System.out.println("false");
         return false;
     }
     public static int sumPartOfArray(int[] array, int startPosition, int endPosition) {
