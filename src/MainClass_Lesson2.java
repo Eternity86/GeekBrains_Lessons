@@ -47,8 +47,9 @@ public class MainClass_Lesson2 {
         Примеры: checkBalance([1, 1, 1, || 2, 1]) → true, checkBalance ([2, 1, 1, 2, 1]) → false, checkBalance ([10, || 10]) → true,
         граница показана символами ||, эти символы в массив не входят. */
         int m6 = 6;
-        int[] arr6 = new int[m6];
-        System.out.println(checkBalance(arr6));
+        //int[] arr6 = new int[m6];
+        int[] arr6 = {10, 10};
+        checkBalance(arr6);
 
         //=====================================================================================================================================================
 
@@ -65,6 +66,7 @@ public class MainClass_Lesson2 {
         int n8 = 7;
         int[][] array8 = new int[m8][n8];
         arraySpiralFilling(array8);
+
 
         //=====================================================================================================================================================
 
@@ -110,7 +112,7 @@ public class MainClass_Lesson2 {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (i == j || i == ((n - 1) - j)) {     // через объединение условий мы не заносим дважды в центр массива заполнитель, когда размерность массива нечётная
-                    array[i][j] = unitFiller;           // заполняем диагональные элементы переданным заполнителем
+                    array[i][j] = unitFiller;           // заполняем диагональные элементы переданным заполнителем, меняем массив на char и можно заполнителем сделать 'X'
                 } else {
                     array[i][j] = 0;                    // по умолчанию значения типа int всё равно инициализируются нулём, но во избежание сделаем это ещё раз сами
                 }
@@ -136,10 +138,22 @@ public class MainClass_Lesson2 {
     }
 
     public static boolean checkBalance(int[] array) {
-        if (array[0] == (array[1] + /*... +*/ array[array.length - 1]));
-        if ((array[0] + array[1]) == (array[2] + /*... +*/  array[array.length - 1]));
-        if ((array[0] + array[1] + array[2]) == (array[3] + /*... +*/ array[array.length - 1]));
-        return true;
+        for (int i = 0; i < array.length; i++) {
+            if (sumPartOfArray(array, 0, i) == sumPartOfArray(array, i + 1, array.length - 1)) {
+                System.out.println("true");
+                return true;
+            }
+        }
+        System.out.println("false");
+        return false;
+    }
+    public static int sumPartOfArray(int[] array, int startPosition, int endPosition) {
+        if (endPosition < startPosition) return 0;
+        int sum = 0;
+        for (int i = startPosition; i <= endPosition; i++) {
+            sum += array[i];
+        }
+        return sum;
     }
 
     public static void arrayShift(int[] array) {
