@@ -36,7 +36,7 @@ public class MainClass_Lesson2 {
         //=====================================================================================================================================================
 
         /* 5. ** Задать одномерный массив и найти в нем минимальный и максимальный элементы (без помощи интернета). */
-        int m5 = 10;                                             // размерность массива
+        // int m5 = 10;                                             // размерность массива
         int[] array1Dimension = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8};
         System.out.println("min = " + getMin(array1Dimension) + ", max = " + getMax(array1Dimension));
 
@@ -59,10 +59,12 @@ public class MainClass_Lesson2 {
 
         /* 7. **** Написать метод, которому на вход подается одномерный массив и число n (может быть положительным, или отрицательным),
         при этом метод должен сместить все элементы массива на n позиций. Для усложнения задачи нельзя пользоваться вспомогательными массивами. */
-        int m7 = 6;
-        int[] arr7 = new int[m7];
-        arrayShift(arr7);
-        //System.out.println(0 % 4);
+        //int m7 = 6;           // размерность одномерного массива
+        int[] arr7 = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8};
+        int n7 = -3;
+        printArray(arr7);
+        arrayShiftNTimes(arr7, n7);
+        printArray(arr7);
 
         //=====================================================================================================================================================
 
@@ -78,17 +80,18 @@ public class MainClass_Lesson2 {
     }
 
     public static void printArray (int[] array) {
-        for (int i = 0; i < array.length; i++) {
-            System.out.print(array[i] + " ");
+        for (int anArray : array) {
+            System.out.print(anArray + " ");
         }
         System.out.println();
     }
 
     public static void printTwoDimensionalArray (int[][] array) {
-        int m = array.length, n = array[0].length;
-        for (int i = 0; i < m; i++) {
+        // int m = array.length;
+        int n = array[0].length;
+        for (int[] anArray : array) {
             for (int j = 0; j < n; j++) {
-                System.out.print(array[i][j] + " ");
+                System.out.print(anArray[j] + " ");
             }
             System.out.println();
         }
@@ -158,8 +161,33 @@ public class MainClass_Lesson2 {
         return sum;
     }
 
-    public static void arrayShift(int[] array) {
-
+    public static void arrayShiftNTimes(int[] array, int n) {   // n раз в цикле выполняем сдвиг массива
+        if (n > 0) {
+            for (int i = 1; i <= n; i++) {
+                arrayShiftPositive(array);
+            }
+        } else if (n < 0) {
+            n = -n;                                         // если n отрицательное - делаем его положительным, чтобы использовать в цикле
+            for (int i = 1; i <= n; i++) {
+                arrayShiftNegative(array);
+            }
+        }
+    }
+    public static void arrayShiftPositive(int[] array) {    // цикличный сдвиг массива при положительном n - вправо
+        int m = array.length - 1;                           // индекс последнего элемента массива
+        int last = array[m];                                // запоминаем значение последнего элемента массива
+        for (int i = m; i > 0 ; i--) {
+            array[i] = array[i - 1];
+        }
+        array[0] = last;                                    // первому элементу массива после всех манипуляций присваиваем значение последнего элемента
+    }
+    public static void arrayShiftNegative(int[] array) {    // цикличный сдвиг массива при отрицательном n - влево
+        int m = array.length - 1;
+        int first = array[0];
+        for (int i = 0; i < m; i++) {
+            array[i] = array[i + 1];
+        }
+        array[m] = first;
     }
 
     public static void arraySpiralFilling(int[][] array) {
