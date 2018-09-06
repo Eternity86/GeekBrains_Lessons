@@ -141,14 +141,14 @@ public class MainClass_Lesson2 {
         for (int i = 0; i < array.length; i++) {
             if (sumPartOfArray(array, 0, i) == sumPartOfArray(array, i + 1, array.length - 1)) {
                 System.out.println("true");
-                return true;
+                return true;                                    // в случае true по индексам i и i+1 массив разбивается на два равных по сумме значений
             }
         }
         System.out.println("false");
         return false;
     }
     public static int sumPartOfArray(int[] array, int startPosition, int endPosition) {
-        if (endPosition < startPosition) return 0;
+        if (endPosition < startPosition) return 0;              // момент, когда мы сложили весь массив, начиная слева, и справа ничего не осталось - возможно, костыль
         int sum = 0;
         for (int i = startPosition; i <= endPosition; i++) {
             sum += array[i];
