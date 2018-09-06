@@ -1,29 +1,35 @@
-// import java.util.Date;
+/* ##########################################
+# ДЗ ко второму уроку по Java на GeekBrains #
+# ========================================= #
+#                                           #
+#                                           #
+########################################## */
 
 public class MainClass_Lesson2 {
     public static void main(String[] args) {
-        /* ДЗ ко второму уроку по Java на GeekBrains */
 
         /* 1. Задать целочисленный массив, состоящий из элементов 0 и 1. Например: [ 1, 1, 0, 0, 1, 0, 1, 1, 0, 0 ].
         С помощью цикла и условия заменить 0 на 1, 1 на 0. */
-        int[] arrInt = {1, 1, 0, 0, 1, 0, 1, 1, 0, 0 };
-        invertArray(arrInt);                        // т.к. массив передаётся по ссылке, то после работы внутренней метода изменяются значения переданного массива, хоть метод ничего и не возвращает
-        printArray(arrInt);
+        int[] array1 = {1, 1, 0, 0, 1, 0, 1, 1, 0, 0 };
+        printArray(array1);
+        invertArray(array1);                        // т.к. массив передаётся по ссылке, то после работы внутренней метода изменяются значения переданного массива, хоть метод ничего и не возвращает
+        printArray(array1);
 
         //=====================================================================================================================================================
 
         /* 2. Задать пустой целочисленный массив размером 8. С помощью цикла заполнить его значениями 0 3 6 9 12 15 18 21. */
         int m2 = 8;
-        int[] arrayInt = new int[m2];
-        fillArrayMultipleOfThree(arrayInt);
-        printArray(arrayInt);
+        int[] array2 = new int[m2];
+        fillArrayMultipleOfThree(array2);
+        printArray(array2);
 
         //=====================================================================================================================================================
 
         /* 3. Задать массив [ 1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1 ] пройти по нему циклом, и числа меньшие 6 умножить на 2. */
-        int[] array = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
-        ifLesserSixMultipleTwo(array);
-        printArray(array);
+        int[] array3 = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
+        printArray(array3);
+        ifLesserSixMultipleTwo(array3);
+        printArray(array3);
 
         //=====================================================================================================================================================
 
@@ -39,8 +45,8 @@ public class MainClass_Lesson2 {
 
         /* 5. ** Задать одномерный массив и найти в нем минимальный и максимальный элементы (без помощи интернета). */
         // int m5 = 10;                                             // размерность массива
-        int[] array1Dimension = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8};
-        System.out.println("min = " + getMin(array1Dimension) + ", max = " + getMax(array1Dimension));
+        int[] array5 = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8};
+        System.out.println("min = " + getMin(array5) + ", max = " + getMax(array5));
 
         //=====================================================================================================================================================
 
@@ -49,27 +55,27 @@ public class MainClass_Lesson2 {
         Примеры: checkBalance([1, 1, 1, || 2, 1]) → true, checkBalance ([2, 1, 1, 2, 1]) → false, checkBalance ([10, || 10]) → true,
         граница показана символами ||, эти символы в массив не входят. */
         //int m6 = 6;
-        //int[] arr6 = new int[m6];
-        int[] arr6_1 = {1, 1, 1, 2, 1};
-        int[] arr6_2 = {2, 1, 1, 2, 1};
-        int[] arr6_3 = {10, 10};
-        System.out.println(checkBalance(arr6_1));
-        System.out.println(checkBalance(arr6_2));
-        System.out.println(checkBalance(arr6_3));
+        //int[] array6 = new int[m6];
+        int[] array6_1 = {1, 1, 1, 2, 1};
+        int[] array6_2 = {2, 1, 1, 2, 1};
+        int[] array6_3 = {10, 10};
+        System.out.println(checkBalance(array6_1));
+        System.out.println(checkBalance(array6_2));
+        System.out.println(checkBalance(array6_3));
 
         //=====================================================================================================================================================
 
         /* 7. **** Написать метод, которому на вход подается одномерный массив и число n (может быть положительным, или отрицательным),
         при этом метод должен сместить все элементы массива на n позиций. Для усложнения задачи нельзя пользоваться вспомогательными массивами. */
         //int m7 = 6;           // размерность одномерного массива
-        int[] arr7 = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8};
-        int n7 = 1_000_000_005; //10.402182735 сек через arraycopy, 7.536353264 сек через цикл
-        printArray(arr7);
-        // long startTime = System.nanoTime();
-        arrayShiftNTimes(arr7, n7);
-        // long finishTime = System.nanoTime();
-        // System.out.println((finishTime - startTime) / 1000000000.0 + " секунд");
-        printArray(arr7);
+        int[] array7 = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8};
+        int n7 = -1_000_000_005; //10-11 сек через arraycopy, 7-7.5 сек через цикл для Core i3-3110m
+        printArray(array7);
+        //long startTime = System.nanoTime();
+        arrayShiftNTimes(array7, n7);
+        //long finishTime = System.nanoTime();
+        //System.out.println((finishTime - startTime) / 1_000_000_000.0 + " секунд");
+        printArray(array7);
 
         //=====================================================================================================================================================
 
@@ -182,6 +188,8 @@ public class MainClass_Lesson2 {
         int m = array.length - 1;                           // индекс последнего элемента массива
         int last = array[m];                                // запоминаем значение последнего элемента массива
         // System.arraycopy(array, 0, array, 1, m);
+        // На маленьком кол-ве элементов массива arraycopy не работает быстрее "ручного копирования" в цикле.
+        // Возможно, когда элементов будет за миллион+, он покажет себя - лень проверять
         // http://developer.alexanderklimov.ru/android/java/array.php#arraycopy
         for (int i = m; i > 0 ; i--) {
             array[i] = array[i - 1];
@@ -191,11 +199,11 @@ public class MainClass_Lesson2 {
     public static void arrayShiftNegative(int[] array) {    // цикличный сдвиг массива при отрицательном n - влево
         int m = array.length - 1;
         int first = array[0];
-        if (m >= 0) System.arraycopy(array, 1, array, 0, m);
-        // arraycopy выполняет то же самое, что и цикл ниже, но делает это на порядок быстрее
-        /*for (int i = 0; i < m; i++) {
+        // if (m >= 0) System.arraycopy(array, 1, array, 0, m);
+        // http://developer.alexanderklimov.ru/android/java/array.php#arraycopy
+        for (int i = 0; i < m; i++) {
             array[i] = array[i + 1];
-        }*/
+        }
         array[m] = first;
     }
 
