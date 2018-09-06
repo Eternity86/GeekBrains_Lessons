@@ -1,3 +1,5 @@
+// import java.util.Date;
+
 public class MainClass_Lesson2 {
     public static void main(String[] args) {
         /* ДЗ ко второму уроку по Java на GeekBrains */
@@ -61,9 +63,12 @@ public class MainClass_Lesson2 {
         при этом метод должен сместить все элементы массива на n позиций. Для усложнения задачи нельзя пользоваться вспомогательными массивами. */
         //int m7 = 6;           // размерность одномерного массива
         int[] arr7 = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8};
-        int n7 = -3;
+        int n7 = 1_000_000_005; //10.402182735 сек через arraycopy, 7.536353264 сек через цикл
         printArray(arr7);
+        // long startTime = System.nanoTime();
         arrayShiftNTimes(arr7, n7);
+        // long finishTime = System.nanoTime();
+        // System.out.println((finishTime - startTime) / 1000000000.0 + " секунд");
         printArray(arr7);
 
         //=====================================================================================================================================================
@@ -176,6 +181,8 @@ public class MainClass_Lesson2 {
     public static void arrayShiftPositive(int[] array) {    // цикличный сдвиг массива при положительном n - вправо
         int m = array.length - 1;                           // индекс последнего элемента массива
         int last = array[m];                                // запоминаем значение последнего элемента массива
+        // System.arraycopy(array, 0, array, 1, m);
+        // http://developer.alexanderklimov.ru/android/java/array.php#arraycopy
         for (int i = m; i > 0 ; i--) {
             array[i] = array[i - 1];
         }
@@ -184,9 +191,11 @@ public class MainClass_Lesson2 {
     public static void arrayShiftNegative(int[] array) {    // цикличный сдвиг массива при отрицательном n - влево
         int m = array.length - 1;
         int first = array[0];
-        for (int i = 0; i < m; i++) {
+        if (m >= 0) System.arraycopy(array, 1, array, 0, m);
+        // arraycopy выполняет то же самое, что и цикл ниже, но делает это на порядок быстрее
+        /*for (int i = 0; i < m; i++) {
             array[i] = array[i + 1];
-        }
+        }*/
         array[m] = first;
     }
 
