@@ -83,8 +83,8 @@ public class MainClass_Lesson2 {
 
         /* 8. ***** Создать матрицу размерностью m*n и заполнить её по спирали числами от 1 до (m*n) с шагом 1,
         начиная с крайнего верхнего левого положения (0, 0)*/
-        int m8 = 5;
-        int n8 = 7;
+        int m8 = 4;
+        int n8 = 3;
         int[][] array8 = new int[m8][n8];
         arraySpiralFilling(array8);
         printTwoDimensionalArraySpiral(array8);
@@ -233,15 +233,50 @@ public class MainClass_Lesson2 {
 
     public static void arraySpiralFilling(int[][] array) {
         int m = array.length, n = array[0].length;
+        int limit = m * n;
         int countNumber = 0;
         int i = 0, j = 0;
-        while (j < n) {
+        int k = -1;
+        while (countNumber < limit) {
+            while (j < n) {
+                countNumber++;
+                array[i][j] = countNumber;
+                j++;
+            }
+            i++;
+            j--;
+            while (i < m) {
+                countNumber++;
+                array[i][j] = countNumber;
+                i++;
+            }
+            i--;
+            j--;
+            while (j > k) {
+                countNumber++;
+                array[i][j] = countNumber;
+                j--;
+            }
+            i--;
+            j++;
+            k++;
+            while (i > k) {
+                countNumber++;
+                array[i][j] = countNumber;
+                i--;
+            }
+            i++;
+            j++;
+            m--;
+            n--;
+        }
+        /*while (j < n) {
             countNumber++;
             array[i][j] = countNumber;
             j++;
         }
-        j--;
         i++;
+        j--;
         while (i < m) {
             countNumber++;
             array[i][j] = countNumber;
@@ -249,53 +284,72 @@ public class MainClass_Lesson2 {
         }
         i--;
         j--;
-        while (j >= 0) {
+        while (j >= k) {
             countNumber++;
             array[i][j] = countNumber;
             j--;
         }
-        j++;
         i--;
-        while (i > 0) {
+        j++;
+        while (i > k) {
             countNumber++;
             array[i][j] = countNumber;
             i--;
         }
         i++;
         j++;
-        while (j < n - 1) {
+        m--;
+        n--;
+        while (j < n) {
             countNumber++;
             array[i][j] = countNumber;
             j++;
         }
-        j--;
         i++;
-        while (i < m - 1) {
+        j--;
+        while (i < m) {
             countNumber++;
             array[i][j] = countNumber;
             i++;
         }
         i--;
         j--;
-        while (j > 0) {
+        while (j > k) {
             countNumber++;
             array[i][j] = countNumber;
             j--;
         }
-        j++;
         i--;
-        while (i > 1) {
+        j++;
+        k++;
+        while (i > k) {
             countNumber++;
             array[i][j] = countNumber;
             i--;
         }
         i++;
         j++;
-        while (j < n - 2) {
+        m--;
+        n--;
+        while (j < n) {
             countNumber++;
             array[i][j] = countNumber;
             j++;
+        }*/
+        /*i++;
+        j--;
+        while (i < m) {
+            countNumber++;
+            array[i][j] = countNumber;
+            i++;
         }
+        i--;
+        j--;
+        while (j > k) {
+            countNumber++;
+            array[i][j] = countNumber;
+            j--;
+        }*/
         //      m=5 (array.length), n=7 (array[0].length)
         //      int countNumber = 0;
         //      int i = 0, j = 0;
