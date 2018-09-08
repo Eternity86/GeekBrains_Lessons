@@ -67,9 +67,10 @@ public class MainClass_Lesson2 {
 
         /* 7. **** Написать метод, которому на вход подается одномерный массив и число n (может быть положительным, или отрицательным),
         при этом метод должен сместить все элементы массива на n позиций. Для усложнения задачи нельзя пользоваться вспомогательными массивами. */
-        //int m7 = 6;           // размерность одномерного массива
-        int[] array7 = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 15, 8, 20, 5, 65, 1, 2, 3};
-        int n7 = -1_070_060_005; //8-9 сек через arraycopy, 6-6.5 сек через цикл для Core i3-3110m
+        int m7 = 80;           // размерность одномерного массива
+        int[] array7 = new int[m7];
+        fillArrayByRandom(array7, 100);
+        int n7 = -1_070_060;
         printArray(array7);
         // long startTime = System.nanoTime();
         arrayShiftNTimes(array7, n7);
@@ -88,6 +89,12 @@ public class MainClass_Lesson2 {
 
         //=====================================================================================================================================================
 
+    }
+
+    public static void fillArrayByRandom(int[] array, int limit) {
+        for (int i = 0; i < array.length; i++) {
+            array[i] = (int)(Math.random() * limit);
+        }
     }
 
     public static void printArray (int[] array) {
@@ -186,10 +193,10 @@ public class MainClass_Lesson2 {
     }
     public static void arrayShiftPositive(int[] array) {    // цикличный сдвиг массива при положительном n - вправо
         int m = array.length - 1;                           // индекс последнего элемента массива
-        int last = array[m];                                // запоминаем значение последнего элемента массива
-        // System.arraycopy(array, 0, array, 1, m);
+        int last = array[m];                                // запоминаем значение последнего элемента массива, чтобы потом его восстановить после всех манипуляций
+        // System.arraycopy(array, 0, array, 1, array.length - 1);
         // На маленьком кол-ве элементов массива arraycopy не работает быстрее "ручного копирования" в цикле, как указано по ссылке ниже.
-        // Возможно, когда элементов будет за миллион+, он покажет себя - лень проверять
+        // Когда элементов в массиве становится много, через arraycopy становится заметно быстрее
         // http://developer.alexanderklimov.ru/android/java/array.php#arraycopy
         for (int i = m; i > 0 ; i--) {
             array[i] = array[i - 1];
@@ -199,7 +206,7 @@ public class MainClass_Lesson2 {
     public static void arrayShiftNegative(int[] array) {    // цикличный сдвиг массива при отрицательном n - влево
         int m = array.length - 1;
         int first = array[0];
-        // if (m >= 0) System.arraycopy(array, 1, array, 0, m);
+        // if (array.length - 1 > 0) System.arraycopy(array, 1, array, 0, array.length - 1);
         // http://developer.alexanderklimov.ru/android/java/array.php#arraycopy
         for (int i = 0; i < m; i++) {
             array[i] = array[i + 1];
@@ -208,23 +215,23 @@ public class MainClass_Lesson2 {
     }
 
     public static void arraySpiralFilling(int[][] array) {
-        //      i=5 (array.length), j=7 (array[0].length)
-        // 1.	m равно 0, n увеличивается от 0 до j-1
-        //          array[0][0] ... array[0][j-1]
-        // 2.	m увеличивается от 1 до i-1, n равно j-1
-        //          array[1][j-1] ... array[i-1][j-1]
-        // 3.	m равно i-1, n уменьшается от j-2 до 0
-        //          array[i-1][j-2] ... array[i-1][0]
-        // 4.	m уменьшается от i-2 до 1, n равно 0
-        //          array[i-2][0] ... array[1][0]
-        // 5.	m равно 1, n увеличивается от 1 до j-2
-        //          array[1][1] ... array[1][j-2]
-        // 6.	m увеличивается от 2 до i-2, n равно j-2
-        //          array[2][j-2] ... array[i-2][j-2]
-        // 7.	m равно i-2, n уменьшается от j-3 до 1
-        //          array[i-2][j-3] ... array[i-2][1]
-        // 8.	m равно i-3, n увеличивается от 1 до j-3
-        //          array[i-3][1] ... array[i-3][j-3]
+        //      m=5 (array.length), n=7 (array[0].length)
+        // 1.	i равно 0, j увеличивается от 0 до n-1
+        //          array[0][0] ... array[0][n-1]
+        // 2.	i увеличивается от 1 до m-1, n равно n-1
+        //          array[1][n-1] ... array[m-1][n-1]
+        // 3.	i равно m-1, j уменьшается от n-2 до 0
+        //          array[m-1][n-2] ... array[m-1][0]
+        // 4.	i уменьшается от m-2 до 1, j равно 0
+        //          array[m-2][0] ... array[1][0]
+        // 5.	i равно 1, j увеличивается от 1 до n-2
+        //          array[1][1] ... array[1][n-2]
+        // 6.	i увеличивается от 2 до m-2, n равно n-2
+        //          array[2][n-2] ... array[m-2][n-2]
+        // 7.	i равно m-2, j уменьшается от n-3 до 1
+        //          array[m-2][n-3] ... array[m-2][1]
+        // 8.	i равно m-3, j увеличивается от 1 до n-3
+        //          array[m-3][1] ... array[m-3][n-3]
 
 
     }
