@@ -87,6 +87,7 @@ public class MainClass_Lesson2 {
         int n8 = 7;
         int[][] array8 = new int[m8][n8];
         arraySpiralFilling(array8);
+        printTwoDimensionalArraySpiral(array8);
 
 
         //=====================================================================================================================================================
@@ -112,6 +113,21 @@ public class MainClass_Lesson2 {
         for (int[] anArray : array) {
             for (int j = 0; j < n; j++) {
                 System.out.printf("%d ", anArray[j]);
+            }
+            System.out.println();
+        }
+    }
+
+    public static void printTwoDimensionalArraySpiral (int[][] array) {
+        // int m = array.length;
+        int n = array[0].length;
+        for (int[] anArray : array) {
+            for (int j = 0; j < n; j++) {
+                if (anArray[j] < 10){
+                    System.out.printf("0%d ", anArray[j]);
+                } else {
+                    System.out.printf("%d ", anArray[j]);
+                }
             }
             System.out.println();
         }
@@ -209,7 +225,6 @@ public class MainClass_Lesson2 {
         int m = array.length - 1;
         int first = array[0];
         // if (array.length - 1 > 0) System.arraycopy(array, 1, array, 0, array.length - 1);
-        // http://developer.alexanderklimov.ru/android/java/array.php#arraycopy
         for (int i = 0; i < m; i++) {
             array[i] = array[i + 1];
         }
@@ -217,10 +232,76 @@ public class MainClass_Lesson2 {
     }
 
     public static void arraySpiralFilling(int[][] array) {
+        int m = array.length, n = array[0].length;
+        int countNumber = 0;
+        int i = 0, j = 0;
+        while (j < n) {
+            countNumber++;
+            array[i][j] = countNumber;
+            j++;
+        }
+        j--;
+        i++;
+        while (i < m) {
+            countNumber++;
+            array[i][j] = countNumber;
+            i++;
+        }
+        i--;
+        j--;
+        while (j >= 0) {
+            countNumber++;
+            array[i][j] = countNumber;
+            j--;
+        }
+        j++;
+        i--;
+        while (i > 0) {
+            countNumber++;
+            array[i][j] = countNumber;
+            i--;
+        }
+        i++;
+        j++;
+        while (j < n - 1) {
+            countNumber++;
+            array[i][j] = countNumber;
+            j++;
+        }
+        j--;
+        i++;
+        while (i < m - 1) {
+            countNumber++;
+            array[i][j] = countNumber;
+            i++;
+        }
+        i--;
+        j--;
+        while (j > 0) {
+            countNumber++;
+            array[i][j] = countNumber;
+            j--;
+        }
+        j++;
+        i--;
+        while (i > 1) {
+            countNumber++;
+            array[i][j] = countNumber;
+            i--;
+        }
+        i++;
+        j++;
+        while (j < n - 2) {
+            countNumber++;
+            array[i][j] = countNumber;
+            j++;
+        }
         //      m=5 (array.length), n=7 (array[0].length)
+        //      int countNumber = 0;
+        //      int i = 0, j = 0;
         // 1.	i равно 0, j увеличивается от 0 до n-1
         //          array[0][0] ... array[0][n-1]
-        // 2.	i увеличивается от 1 до m-1, n равно n-1
+        // 2.	i увеличивается от 1 до m-1, j равно n-1
         //          array[1][n-1] ... array[m-1][n-1]
         // 3.	i равно m-1, j уменьшается от n-2 до 0
         //          array[m-1][n-2] ... array[m-1][0]
