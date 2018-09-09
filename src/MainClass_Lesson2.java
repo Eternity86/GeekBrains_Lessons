@@ -83,8 +83,8 @@ public class MainClass_Lesson2 {
 
         /* 8. ***** Создать матрицу размерностью m*n и заполнить её по спирали числами от 1 до (m*n) с шагом 1,
         начиная с крайнего верхнего левого положения (0, 0)*/
-        int m8 = 11;
-        int n8 = 9;
+        int m8 = 5;
+        int n8 = 7;
         int[][] array8 = new int[m8][n8];
         arraySpiralFilling(array8);
         printTwoDimensionalArraySpiral(array8);
@@ -243,7 +243,7 @@ public class MainClass_Lesson2 {
                 array[i][j] = countNumber;
                 j++;
             }
-            if (countNumber == limit) return;   //проверка, если m = 1, т.е. по факту одномерный массив массивов
+            if (countNumber == limit) return;
             i++;
             j--;
             while (i < m) {
@@ -251,6 +251,7 @@ public class MainClass_Lesson2 {
                 array[i][j] = countNumber;
                 i++;
             }
+            if (countNumber == limit) return;
             i--;
             j--;
             while (j > k) {
@@ -258,6 +259,7 @@ public class MainClass_Lesson2 {
                 array[i][j] = countNumber;
                 j--;
             }
+            if (countNumber == limit) return;
             i--;
             j++;
             k++;
@@ -266,6 +268,7 @@ public class MainClass_Lesson2 {
                 array[i][j] = countNumber;
                 i--;
             }
+            if (countNumber == limit) return;
             i++;
             j++;
             m--;
