@@ -1,9 +1,11 @@
-package ru.com.GeekBrains.Lesson2;/* ##########################################
+/* ##########################################
 # ДЗ ко второму уроку по Java на GeekBrains #
 # ========================================= #
 #                                           #
 #                                           #
 ########################################## */
+
+package ru.com.GeekBrains.Lesson2;
 
 public class MainClass_Lesson2 {
     public static void main(String[] args) {
