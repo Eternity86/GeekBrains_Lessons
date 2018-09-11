@@ -4,18 +4,18 @@ public class MainClass {
     public static void main(String[] args) {
 
     // п.2
-        byte b = 12;                // 1 ���� - �� -128 �� 127
-        short s = 250;              // 2 ����� - �� -32768 �� 32767
-        int i = 45000;              // 4 ����� - �� -2147483648 �� 2147483647
-        long l = 452654l;           // 8 ���� - �� -(2 � 64 �������) �� (2 � 64 �������)-1
+        byte b = 12;                // 1 байт - от -128 до 127
+        short s = 250;              // 2 байта - от -32768 до 32767
+        int i = 45000;              // 4 байта - от -2147483648 до 2147483647
+        long l = 452654l;           // 8 байт - от -(2 в 64 степени) до (2 в 64 степени)-1
 
-        float f = 1.0f;             // 4 �����
-        double d = 12.3;            // 8 ����
+        float f = 1.0f;             // 4 байта
+        double d = 12.3;            // 8 байт
 
-        char c = 'c';               // 2 ����� - ��������� ������ � UTF-16
+        char c = 'c';               // 2 байта - отдельный символ в UTF-16
         char c2 = 'b';
 
-        boolean boolTrue = true;    // true ��� false
+        boolean boolTrue = true;    // true или false
         boolean boolFalse = false;
 
 
@@ -58,8 +58,8 @@ public class MainClass {
     //п.5
     public static void isPositiveOrNegative(int a) {
         if (a < 0) {
-            System.out.println("����� �������������");
-        } else System.out.println("����� �������������");
+            System.out.println("Число отрицательное");
+        } else System.out.println("Число положительное");
     }
 
     //п.6
@@ -77,8 +77,8 @@ public class MainClass {
     //п.8
     public static void isLeapYear(int year) {
         if (year % 100 == 0 && year % 400 != 0 || year % 4 != 0) {
-            System.out.println("��� ������������");
-        } else System.out.println("��� ����������");
+            System.out.println("Год невисокосный");
+        } else System.out.println("Год високосный");
 
     }
 
