@@ -12,8 +12,6 @@ package ru.com.GeekBrains.Lesson3;
     После победы или проигрыша выводится запрос – «Повторить игру еще раз? 1 – да / 0 – нет»(1 – повторить, 0 – нет).
 */
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -30,13 +28,13 @@ public class GuessTheNumber {
         do {
             mainGame(attempts);
             System.out.println("Повторить игру еще раз? (1 – да / 0 – нет)");
-            int answer = input.nextInt();
+            String answer = input.nextLine();   //чтобы избежать InputMismatchException, всё считаем строкой
             switch (answer) {
-                case 1: {
+                case "1": {
                     flag = true;
                     break;
                 }
-                default: {
+                default: {      //если пользователь ввёл что-то кроме 1, то прекращаем игру
                     System.out.println("Всего хорошего!");
                     flag = false;
                 }
@@ -46,8 +44,8 @@ public class GuessTheNumber {
     }
 
     public static void mainGame(int attempts) {
-        //int number = (int) (Math.random() * UPPER_LIMIT);
-        int number = new Random().nextInt(UPPER_LIMIT + 1);
+        int number = (int) (Math.random() * UPPER_LIMIT);
+        //int number = new Random().nextInt(UPPER_LIMIT + 1);   //метод пока не совсем удобен, т.к. нужно не забывать, что переданная верхняя граница не входит в список случайных значений, но удобен, когда его результат представляет собой индекс массива
         System.out.printf("Приветствую! Я загадал число от %d до %d. Угадай его.\n", LOWER_LIMIT, UPPER_LIMIT);
 
         while (attempts > 0) {
@@ -67,4 +65,14 @@ public class GuessTheNumber {
         }
 
     }
+
+    public static int getLimitedNumberFromScanner(String msg, int min, int max) {
+        int x;
+        do {
+            System.out.println(msg);
+            x = input.nextInt();
+        } while (x < min || x > max);
+    return x;
+    }
+
 }
