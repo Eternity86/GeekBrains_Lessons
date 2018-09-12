@@ -22,8 +22,6 @@ package ru.com.GeekBrains.Lesson3;
     Используем только маленькие буквы
 */
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -36,12 +34,13 @@ public class GuessTheWord {
                 "leak", "kiwi", "mango", "mushroom", "nut", "olive", "pea",
                 "peanut", "pear", "pepper", "pineapple", "pumpkin", "potato"};
         String word = words[new Random().nextInt(words.length)];
-        System.out.println("Я загадал слово. Угадай, какое!");
         String guess;
         int temp;                                                                           // при попытке угадать сюда записываем длину более короткого слова
         char[] tempChar = {'x','x','x','x','x','x','x','x','x','x','x','x','x','x','x'};    // массив символов - маска
+
+        System.out.println("Я загадал слово. Угадай, какое!");
         do {
-            guess = input.nextLine().toLowerCase();
+            guess = input.nextLine().toLowerCase();                                         // т.к. по условию буквы должны быть маленькими, на всякий случай введённое слово преобразуем к строчным буквам
             if (guess.equals(word)) {
                 break;
             } else {
@@ -54,10 +53,5 @@ public class GuessTheWord {
 
         } while (!guess.equals(word));
         System.out.println("Молодец!");
-
-
-
     }
-
-
 }
