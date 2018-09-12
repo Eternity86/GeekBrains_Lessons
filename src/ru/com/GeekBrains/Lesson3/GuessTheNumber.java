@@ -16,7 +16,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class GuessTheNumber {
-    private static Scanner input = new Scanner(System.in);
+    static Scanner input = new Scanner(System.in);
     private static final int LOWER_LIMIT = 0;
     private static final int UPPER_LIMIT = 9;
 
@@ -34,7 +34,7 @@ public class GuessTheNumber {
                     flag = true;
                     break;
                 }
-                default: {      //если пользователь ввёл что-то кроме 1, то прекращаем игру
+                default: {                      //если пользователь ввёл что-то кроме 1, то прекращаем игру. Или же можно попытаться ограничить ответ через метод getLimitedNumberFromScanner
                     System.out.println("Всего хорошего!");
                     flag = false;
                 }
@@ -45,7 +45,7 @@ public class GuessTheNumber {
 
     public static void mainGame(int attempts) {
         int number = (int) (Math.random() * UPPER_LIMIT);
-        //int number = new Random().nextInt(UPPER_LIMIT + 1);   //метод пока не совсем удобен, т.к. нужно не забывать, что переданная верхняя граница не входит в список случайных значений, но удобен, когда его результат представляет собой индекс массива
+        //int number = new Random().nextInt(UPPER_LIMIT + 1);   //метод не совсем удобен, т.к. нужно не забывать, что переданная верхняя граница не входит в список случайных значений, но удобен, когда его результат представляет собой индекс массива
         System.out.printf("Приветствую! Я загадал число от %d до %d. Угадай его.\n", LOWER_LIMIT, UPPER_LIMIT);
 
         while (attempts > 0) {
