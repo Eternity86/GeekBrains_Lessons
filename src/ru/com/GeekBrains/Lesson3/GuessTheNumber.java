@@ -50,7 +50,7 @@ public class GuessTheNumber {
 
         while (attempts > 0) {
             int myNumber = input.nextInt();
-            attempts--;
+            attempts--;                                         // пользователь ввёл число-предположение - уменьшаем счётчик попыток
             if (myNumber == number) {
                 System.out.println("Ты угадал моё число. Молодец!");
                 break;
@@ -66,13 +66,13 @@ public class GuessTheNumber {
 
     }
 
-    public static int getLimitedNumberFromScanner(String msg, int min, int max) {
+    /*public static int getLimitedNumberFromScanner(String msg, int min, int max) {
         int x;
         do {
             System.out.println(msg);
             x = input.nextInt();
         } while (x < min || x > max);
     return x;
-    }
+    }*/
 
 }
