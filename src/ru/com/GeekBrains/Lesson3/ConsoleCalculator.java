@@ -48,6 +48,9 @@ public class ConsoleCalculator {
         }
     }
 
+    // можно во всех методах использовать не Integer, а Float, чтобы можно было работать как с целыми, так и с дробными числами
+    // при делении использовать Float (или Double) обязательно, чтобы не потерять дробную часть и получить точный ответ без потерь
+
     public static int add(String... arr) {
         int sum = Integer.parseInt(arr[0]);
         for (int i = 1; i < arr.length; i++) {
