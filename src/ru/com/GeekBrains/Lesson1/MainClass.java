@@ -50,9 +50,7 @@ public class MainClass {
 
     //п.4
     public static boolean getSolution2Digits(int a, int b) {
-        if ((a + b) >= 10 && (a + b) <= 20) {
-            return true;
-        } else return false;
+        return (a + b) >= 10 && (a + b) <= 20;
     }
 
     //п.5
@@ -64,9 +62,7 @@ public class MainClass {
 
     //п.6
     public static boolean isNegative(int a) {
-        if (a < 0) {
-            return true;
-        } else return false;
+        return a < 0;
     }
 
     //п.7
