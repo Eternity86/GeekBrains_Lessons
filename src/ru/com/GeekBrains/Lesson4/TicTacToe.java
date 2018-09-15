@@ -1,11 +1,25 @@
+/* ##########################################
+# ДЗ к четвёртому уроку по Java на GeekBrains #
+# =========================================== #
+# Задача №1                                  #
+#                                             #
+############################################# */
+
 package ru.com.GeekBrains.Lesson4;
+
+/* Крестики-нолики в процедурном стиле
+1. Полностью разобраться с кодом, попробовать переписать с нуля, стараясь не подглядывать в методичку;
+2. Переделать проверку победы, чтобы она не была реализована просто набором условий, например, с использованием циклов.
+3. * Попробовать переписать логику проверки победы, чтобы она работала для поля 5х5 и количества фишек 4. Очень желательно не делать это просто набором условий для каждой из возможных ситуаций;
+4. *** Доработать искусственный интеллект, чтобы он мог блокировать ходы игрока.
+*/
 
 import java.util.Random;
 import java.util.Scanner;
 
 public class TicTacToe {
 
-    public static final int FIELD_SIZE = 3;    // размер игрового поля
+    public static final int FIELD_SIZE = 5;    // размер игрового поля - оно квадратное
     public static final int DOTS_TO_WIN = 3;        // сколько ячеек нужно подряд заполнить, чтобы победить
 
     public static final char EMPTY_DOT = '.';       // заполнитель для пустой ячейки
@@ -26,7 +40,7 @@ public class TicTacToe {
 
     public static void printGameField() {
         for (int i = 0; i <= gameField.length; i++) {    // распечатываем горизонтальную "шапку" - координата X
-            System.out.print(i == 0 ? "  " : i + " ");  // не выводим 0 на печать, а заменяем его двойным пробелом, чтобы не засорять вывод координат
+            System.out.print(i == 0 ? "  " : i + " ");   // не выводим 0 на печать, а заменяем его двойным пробелом, чтобы не засорять вывод координат
         }
         System.out.println();
         for (int i = 0; i < gameField.length; i++) {
@@ -40,7 +54,7 @@ public class TicTacToe {
     }
 
     public static boolean isCellAvailable(int x, int y) {
-        return x >= 0 && x < FIELD_SIZE && y >= 0 && y < FIELD_SIZE && gameField[y][x] == EMPTY_DOT;
+        return x >= 0 && x < FIELD_SIZE && y >= 0 && y < FIELD_SIZE && gameField[y][x] == EMPTY_DOT;    // если x и y находятся в допустимых пределах И если ячейка не равна пустой, то возвращаем true
     }
 
     public static void player1Move() {
@@ -59,7 +73,7 @@ public class TicTacToe {
             x = new Random().nextInt(FIELD_SIZE);
             y = new Random().nextInt(FIELD_SIZE);
         } while (!isCellAvailable(x, y));
-        System.out.println("ИИ походил в точку " + (x + 1) + " " + (y + 1));
+        System.out.println("ИИ походил в ячейку " + (x + 1) + " " + (y + 1));
         gameField[y][x] = PLAYER_2_DOT;
     }
 
@@ -71,12 +85,20 @@ public class TicTacToe {
             for (int j = 0; j < FIELD_SIZE; j++) {
                 if (gameField[i][j] == playerSymbol) {      // проверяем горизонтальные линии на возможную победу
                     hor++;
+                /*} else if (gameField[i][j] != playerSymbol && hor == DOTS_TO_WIN) {
+                    return true;*/
+                } else if (gameField[i][j] != playerSymbol && hor < DOTS_TO_WIN) {
+                    hor = 0;
                 }
                 if (gameField[j][i] == playerSymbol) {      // проверяем вертикальные линии на возможную победу
                     ver++;
+                /*} else if (gameField[j][i] != playerSymbol && ver == DOTS_TO_WIN) {
+                    return true;*/
+                }   else if (gameField[j][i] != playerSymbol && ver < DOTS_TO_WIN) {
+                    ver = 0;
                 }
             }
-            if (hor == DOTS_TO_WIN || ver == DOTS_TO_WIN) {
+            if (hor >= DOTS_TO_WIN || ver >= DOTS_TO_WIN) {
                 return true;
             }
         }
@@ -84,16 +106,23 @@ public class TicTacToe {
         for (int i = 0; i < FIELD_SIZE; i++) {
             if (gameField[i][i] == playerSymbol) {                      // проверяем главную диагональ на возможную победу
                 diag1++;
+            /*} else if (gameField[i][i] != playerSymbol && diag1 == DOTS_TO_WIN) {
+                return true;*/
+            } else if (gameField[i][i] != playerSymbol && diag1 < DOTS_TO_WIN) {
+                diag1 = 0;
             }
             if (gameField[i][FIELD_SIZE - i - 1] == playerSymbol) {     // проверяем побочную диагональ на возможную победу
                 diag2++;
+            /*} else if (gameField[i][i] != playerSymbol && diag2 == DOTS_TO_WIN) {
+                return true;*/
+            } else if (gameField[i][FIELD_SIZE - i - 1] != playerSymbol && diag2 < DOTS_TO_WIN) {
+                diag2 = 0;
+            }
+            if (diag1 >= DOTS_TO_WIN || diag2 >= DOTS_TO_WIN) {
+                return true;
             }
         }
-        if (diag1 == DOTS_TO_WIN || diag2 == DOTS_TO_WIN) {
-            return true;
-        }
-
-        return false;
+        return false;            // если проверки горизонталей, вертикалей и диагоналей не возвращают true, то по итогу метод возвращает false
 
         /*if(gameField[0][0] == playerSymbol && gameField[0][1] == playerSymbol && gameField[0][2] == playerSymbol) return true;
         if(gameField[1][0] == playerSymbol && gameField[1][1] == playerSymbol && gameField[1][2] == playerSymbol) return true;
@@ -108,10 +137,10 @@ public class TicTacToe {
         return false;*/
     }
 
-    public static boolean isDraw() {
-        for (int i = 0; i < gameField.length; i++) {
+    public static boolean isDraw() {                            // метод проверяет вариант ничьей
+        for (char[] aGameField : gameField) {
             for (int j = 0; j < gameField.length; j++) {
-                if (gameField[i][j] == EMPTY_DOT) {
+                if (aGameField[j] == EMPTY_DOT) {
                     return false;
                 }
             }
@@ -120,8 +149,23 @@ public class TicTacToe {
     }
 
     public static void main(String[] args) {
-        initGameField();
-        printGameField();
+        initGameField();                    // инициализируем игровое поле - создаём "пустой" двумерный массив
+        printGameField();                   // выводим состояние начального поля в консоль
+
+        // в бесконечном цикле (повторяем, пока не найдётся либо победитель, либо ничья):
+            // ход первого игрока: если человек, тогда запрашиваем координаты хода; если AI - он сам находит координаты хода
+            // проверка на победу
+            // проверка на ничью:
+                // если всё поле заполнено, но победы не было - то ничья
+            // если ничья или победа - выводим, кто победил
+            // выводим на экран состояние игрового поля
+            // ход второго игрока: если AI - он сам находит координаты хода; если человек, тогда запрашиваем координаты хода
+            // проверка на победу
+            // проверка на ничью:
+                // если всё поле заполнено, но победы не было - то ничья
+            // если ничья или победа - выводим, кто победил
+            // выводим на экран состояние игрового поля
+
         while (true) {
             player1Move();
             printGameField();
@@ -146,20 +190,6 @@ public class TicTacToe {
         }
     }
 
-
-    // в цикле:
-    // ход первого игрока: если человек, тогда запрашиваем координаты хода; если AI - он сам находит координаты хода
-    // проверка на ничью:
-    // если всё поле заполнено, но победы не было - то ничья
-    // проверка на победу
-    // если ничья или победа - выводим, кто победил
-    // выводим на экран состояние игрового поля
-    // ход второго игрока: если AI - он сам находит координаты хода; если человек, тогда запрашиваем координаты хода
-    // проверка на ничью:
-    // если всё поле заполнено, но победы не было - то ничья
-    // проверка на победу
-    // если ничья или победа - выводим, кто победил
-    // выводим на экран состояние игрового поля
 
 
 }
