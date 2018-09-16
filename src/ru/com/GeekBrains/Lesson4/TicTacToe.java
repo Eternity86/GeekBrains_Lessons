@@ -1,9 +1,9 @@
-/* ##########################################
+/* ############################################
 # ДЗ к четвёртому уроку по Java на GeekBrains #
 # =========================================== #
 # Задача №1                                  #
 #                                             #
-############################################# */
+############################################ */
 
 package ru.com.GeekBrains.Lesson4;
 
@@ -19,15 +19,15 @@ import java.util.Scanner;
 
 public class TicTacToe {
 
-    public static final int FIELD_SIZE = 7;    // размер игрового поля - оно квадратное
-    public static final int DOTS_TO_WIN = 3;        // сколько ячеек нужно подряд заполнить, чтобы победить
+    public static final int FIELD_SIZE = 5;         // размер игрового поля
+    public static final int DOTS_TO_WIN = 4;        // сколько ячеек нужно подряд заполнить, чтобы победить
 
     public static final char EMPTY_DOT = '.';       // заполнитель для пустой ячейки
     public static final char PLAYER_1_DOT = 'X';    // символ, которым играет первый игрок
     public static final char PLAYER_2_DOT = 'O';    // символ, которым играет второй игрок
 
     public static Scanner input = new Scanner(System.in);
-    public static char[][] gameField;               // игровое поле - в виде двумерного символьного массива
+    public static char[][] gameField;               // игровое поле - в виде двумерного массива символов
 
     public static void initGameField() {
         gameField = new char[FIELD_SIZE][FIELD_SIZE];
@@ -178,6 +178,7 @@ public class TicTacToe {
 
     public static void main(String[] args) {
         initGameField();                    // инициализируем игровое поле - создаём "пустой" двумерный массив
+        System.out.printf("Цель игры - заполнить подряд линию по вертикали, горизонтали или диагонали из %d Ваших символов.\n\n", DOTS_TO_WIN);
         printGameField();                   // выводим состояние начального поля в консоль
 
         // в бесконечном цикле (повторяем, пока не найдётся либо победитель, либо ничья):
