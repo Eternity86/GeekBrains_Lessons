@@ -89,7 +89,7 @@ public class TicTacToe {
                 } else if (gameField[i][j] != playerDot && hor < DOTS_TO_WIN) {
                     hor = 0;
                 }
-                if (gameField[j][i] == playerDot) {      // проверяем вертикальные линии на возможную победу
+                if (gameField[j][i] == playerDot) {                          // проверяем вертикальные линии на возможную победу
                     ver++;
                 }   else if (gameField[j][i] != playerDot && ver < DOTS_TO_WIN) {
                     ver = 0;
@@ -104,23 +104,22 @@ public class TicTacToe {
             for (int i = 0; i < FIELD_SIZE; i++) {
                 int k = j + i;
                 if (k < FIELD_SIZE) {
-                    if (gameField[i][k] == playerDot) {                      // проверяем главную диагональ на возможную победу
+                    if (gameField[i][k] == playerDot) {                      // проверяем главную диагональ от центральной оси вправо на возможную победу
                         diagMain++;
                     } else if (gameField[i][k] != playerDot && diagMain < DOTS_TO_WIN) {
                         diagMain = 0;
                     }
                 }
-
                 if (diagMain >= DOTS_TO_WIN) {
                     return true;
                 }
             }
         }
-        for (int j = 0; j < FIELD_SIZE; j++) {
+        for (int j = 1; j < FIELD_SIZE; j++) {
             for (int i = 0; i < FIELD_SIZE; i++) {
                 int k = j + i;
                 if (k < FIELD_SIZE) {
-                    if (gameField[k][i] == playerDot) {                      // проверяем главную диагональ на возможную победу
+                    if (gameField[k][i] == playerDot) {                      // проверяем главную диагональ от центральной оси вниз на возможную победу
                         diagMain++;
                     } else if (gameField[k][i] != playerDot && diagMain < DOTS_TO_WIN) {
                         diagMain = 0;
@@ -136,7 +135,7 @@ public class TicTacToe {
                 int k = (FIELD_SIZE - 1) - i;
                 int l = j + i;
                 if (k >= 0 && l < FIELD_SIZE) {
-                    if (gameField[l][k] == playerDot) {     // проверяем побочную диагональ от центра вниз на возможную победу
+                    if (gameField[l][k] == playerDot) {     // проверяем побочную диагональ от центральной оси вниз на возможную победу
                         diagReverse++;
                     } else if (gameField[l][k] != playerDot && diagReverse < DOTS_TO_WIN) {
                         diagReverse = 0;
@@ -147,11 +146,11 @@ public class TicTacToe {
                 }
             }
         }
-        for (int j = 0; j < FIELD_SIZE; j++) {
+        for (int j = 1; j < FIELD_SIZE; j++) {
             for (int i = 0; i < FIELD_SIZE; i++) {
                 int k = (FIELD_SIZE - 1) - j - i;
                 if (k >= 0) {
-                    if (gameField[i][k] == playerDot) {     // проверяем побочную диагональ от центра вверх на возможную победу
+                    if (gameField[i][k] == playerDot) {     // проверяем побочную диагональ от центральной оси влево на возможную победу
                         diagReverse++;
                     } else if (gameField[i][k] != playerDot && diagReverse < DOTS_TO_WIN) {
                         diagReverse = 0;
@@ -178,7 +177,7 @@ public class TicTacToe {
 
     public static void main(String[] args) {
         initGameField();                    // инициализируем игровое поле - создаём "пустой" двумерный массив
-        System.out.printf("Цель игры - заполнить подряд линию по вертикали, горизонтали или диагонали из %d Ваших символов.\n\n", DOTS_TO_WIN);
+        System.out.printf("Цель игры - заполнить подряд линию по вертикали, горизонтали или диагонали из %d Ваш%s символ%s.\n\n", DOTS_TO_WIN, (DOTS_TO_WIN % 10 == 1 && DOTS_TO_WIN % 100 != 11) ? "его" : "их", (DOTS_TO_WIN % 10 == 1 && DOTS_TO_WIN % 100 != 11) ? "а" : "ов");
         printGameField();                   // выводим состояние начального поля в консоль
 
         // в бесконечном цикле (повторяем, пока не найдётся либо победитель, либо ничья):
