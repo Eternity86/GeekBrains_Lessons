@@ -19,7 +19,7 @@ import java.util.Scanner;
 
 public class TicTacToe {
 
-    public static final int FIELD_SIZE = 5;    // размер игрового поля - оно квадратное
+    public static final int FIELD_SIZE = 7;    // размер игрового поля - оно квадратное
     public static final int DOTS_TO_WIN = 3;        // сколько ячеек нужно подряд заполнить, чтобы победить
 
     public static final char EMPTY_DOT = '.';       // заполнитель для пустой ячейки
@@ -77,24 +77,21 @@ public class TicTacToe {
         gameField[y][x] = PLAYER_2_DOT;
     }
 
-    public static boolean isWin(char playerSymbol) {
+    public static boolean isWin(char playerDot) {
         int hor, ver;
+        int diagMain = 0, diagReverse = 0;
         for (int i = 0; i < FIELD_SIZE; i++) {
             hor = 0;
             ver = 0;
             for (int j = 0; j < FIELD_SIZE; j++) {
-                if (gameField[i][j] == playerSymbol) {      // проверяем горизонтальные линии на возможную победу
+                if (gameField[i][j] == playerDot) {      // проверяем горизонтальные линии на возможную победу
                     hor++;
-                /*} else if (gameField[i][j] != playerSymbol && hor == DOTS_TO_WIN) {
-                    return true;*/
-                } else if (gameField[i][j] != playerSymbol && hor < DOTS_TO_WIN) {
+                } else if (gameField[i][j] != playerDot && hor < DOTS_TO_WIN) {
                     hor = 0;
                 }
-                if (gameField[j][i] == playerSymbol) {      // проверяем вертикальные линии на возможную победу
+                if (gameField[j][i] == playerDot) {      // проверяем вертикальные линии на возможную победу
                     ver++;
-                /*} else if (gameField[j][i] != playerSymbol && ver == DOTS_TO_WIN) {
-                    return true;*/
-                }   else if (gameField[j][i] != playerSymbol && ver < DOTS_TO_WIN) {
+                }   else if (gameField[j][i] != playerDot && ver < DOTS_TO_WIN) {
                     ver = 0;
                 }
             }
@@ -102,39 +99,70 @@ public class TicTacToe {
                 return true;
             }
         }
-        int diag1 = 0, diag2 = 0;
-        for (int i = 0; i < FIELD_SIZE; i++) {
-            if (gameField[i][i] == playerSymbol) {                      // проверяем главную диагональ на возможную победу
-                diag1++;
-            /*} else if (gameField[i][i] != playerSymbol && diag1 == DOTS_TO_WIN) {
-                return true;*/
-            } else if (gameField[i][i] != playerSymbol && diag1 < DOTS_TO_WIN) {
-                diag1 = 0;
-            }
-            if (gameField[i][FIELD_SIZE - i - 1] == playerSymbol) {     // проверяем побочную диагональ на возможную победу
-                diag2++;
-            /*} else if (gameField[i][i] != playerSymbol && diag2 == DOTS_TO_WIN) {
-                return true;*/
-            } else if (gameField[i][FIELD_SIZE - i - 1] != playerSymbol && diag2 < DOTS_TO_WIN) {
-                diag2 = 0;
-            }
-            if (diag1 >= DOTS_TO_WIN || diag2 >= DOTS_TO_WIN) {
-                return true;
+
+        for (int j = 0; j < FIELD_SIZE; j++) {
+            for (int i = 0; i < FIELD_SIZE; i++) {
+                int k = j + i;
+                if (k < FIELD_SIZE) {
+                    if (gameField[i][k] == playerDot) {                      // проверяем главную диагональ на возможную победу
+                        diagMain++;
+                    } else if (gameField[i][k] != playerDot && diagMain < DOTS_TO_WIN) {
+                        diagMain = 0;
+                    }
+                }
+
+                if (diagMain >= DOTS_TO_WIN) {
+                    return true;
+                }
             }
         }
-        return false;            // если проверки горизонталей, вертикалей и диагоналей не возвращают true, то по итогу метод возвращает false
-
-        /*if(gameField[0][0] == playerSymbol && gameField[0][1] == playerSymbol && gameField[0][2] == playerSymbol) return true;
-        if(gameField[1][0] == playerSymbol && gameField[1][1] == playerSymbol && gameField[1][2] == playerSymbol) return true;
-        if(gameField[2][0] == playerSymbol && gameField[2][1] == playerSymbol && gameField[2][2] == playerSymbol) return true;
-
-        if(gameField[0][0] == playerSymbol && gameField[1][0] == playerSymbol && gameField[2][0] == playerSymbol) return true;
-        if(gameField[0][1] == playerSymbol && gameField[1][1] == playerSymbol && gameField[2][1] == playerSymbol) return true;
-        if(gameField[0][2] == playerSymbol && gameField[1][2] == playerSymbol && gameField[2][2] == playerSymbol) return true;
-
-        if(gameField[0][0] == playerSymbol && gameField[1][1] == playerSymbol && gameField[2][2] == playerSymbol) return true;
-        if(gameField[2][0] == playerSymbol && gameField[1][1] == playerSymbol && gameField[0][2] == playerSymbol) return true;
-        return false;*/
+        for (int j = 0; j < FIELD_SIZE; j++) {
+            for (int i = 0; i < FIELD_SIZE; i++) {
+                int k = j + i;
+                if (k < FIELD_SIZE) {
+                    if (gameField[k][i] == playerDot) {                      // проверяем главную диагональ на возможную победу
+                        diagMain++;
+                    } else if (gameField[k][i] != playerDot && diagMain < DOTS_TO_WIN) {
+                        diagMain = 0;
+                    }
+                }
+                if (diagMain >= DOTS_TO_WIN) {
+                    return true;
+                }
+            }
+        }
+        for (int j = 0; j < FIELD_SIZE; j++) {
+            for (int i = 0; i < FIELD_SIZE; i++) {
+                int k = (FIELD_SIZE - 1) - i;
+                int l = j + i;
+                if (k >= 0 && l < FIELD_SIZE) {
+                    if (gameField[l][k] == playerDot) {     // проверяем побочную диагональ от центра вниз на возможную победу
+                        diagReverse++;
+                    } else if (gameField[l][k] != playerDot && diagReverse < DOTS_TO_WIN) {
+                        diagReverse = 0;
+                    }
+                }
+                if (diagReverse >= DOTS_TO_WIN) {
+                    return true;
+                }
+            }
+        }
+        for (int j = 0; j < FIELD_SIZE; j++) {
+            for (int i = 0; i < FIELD_SIZE; i++) {
+                int k = (FIELD_SIZE - 1) - j - i;
+                if (k >= 0) {
+                    if (gameField[i][k] == playerDot) {     // проверяем побочную диагональ от центра вверх на возможную победу
+                        diagReverse++;
+                    } else if (gameField[i][k] != playerDot && diagReverse < DOTS_TO_WIN) {
+                        diagReverse = 0;
+                    }
+                }
+                if (diagReverse >= DOTS_TO_WIN) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public static boolean isDraw() {                            // метод проверяет вариант ничьей
