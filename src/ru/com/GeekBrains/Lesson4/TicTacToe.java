@@ -60,7 +60,7 @@ public class TicTacToe {
     public static void player1Move() {
         int x, y;
         do {
-            System.out.printf("Введите координаты хода в формате X(= 1..%d) Y(= 1..%d):\n", FIELD_SIZE, FIELD_SIZE);
+            System.out.printf("Введите координаты хода через пробел в формате X(= 1..%d) Y(= 1..%d):\n", FIELD_SIZE, FIELD_SIZE);
             x = Integer.valueOf(input.next()) - 1;
             y = Integer.valueOf(input.next()) - 1;
         } while (!isCellAvailable(x, y));
@@ -84,7 +84,7 @@ public class TicTacToe {
             hor = 0;
             ver = 0;
             for (int j = 0; j < FIELD_SIZE; j++) {
-                if (gameField[i][j] == playerDot) {      // проверяем горизонтальные линии на возможную победу
+                if (gameField[i][j] == playerDot) {                          // проверяем горизонтальные линии на возможную победу
                     hor++;
                 } else if (gameField[i][j] != playerDot && hor < DOTS_TO_WIN) {
                     hor = 0;
@@ -135,7 +135,7 @@ public class TicTacToe {
                 int k = (FIELD_SIZE - 1) - i;
                 int l = j + i;
                 if (k >= 0 && l < FIELD_SIZE) {
-                    if (gameField[l][k] == playerDot) {     // проверяем побочную диагональ от центральной оси вниз на возможную победу
+                    if (gameField[l][k] == playerDot) {                     // проверяем побочную диагональ от центральной оси вниз на возможную победу
                         diagReverse++;
                     } else if (gameField[l][k] != playerDot && diagReverse < DOTS_TO_WIN) {
                         diagReverse = 0;
@@ -177,47 +177,76 @@ public class TicTacToe {
 
     public static void main(String[] args) {
         initGameField();                    // инициализируем игровое поле - создаём "пустой" двумерный массив
-        System.out.printf("Цель игры - заполнить подряд линию по вертикали, горизонтали или диагонали из %d Ваш%s символ%s.\n\n", DOTS_TO_WIN, (DOTS_TO_WIN % 10 == 1 && DOTS_TO_WIN % 100 != 11) ? "его" : "их", (DOTS_TO_WIN % 10 == 1 && DOTS_TO_WIN % 100 != 11) ? "а" : "ов");
+        System.out.printf("Цель игры - заполнить подряд линию по вертикали, горизонтали или диагонали из %d Ваш%s символ%s.\n", DOTS_TO_WIN, (DOTS_TO_WIN % 10 == 1 && DOTS_TO_WIN % 100 != 11) ? "его" : "их", (DOTS_TO_WIN % 10 == 1 && DOTS_TO_WIN % 100 != 11) ? "а" : "ов");
         printGameField();                   // выводим состояние начального поля в консоль
+        int firstMove = new Random().nextInt(2);
 
         // в бесконечном цикле (повторяем, пока не найдётся либо победитель, либо ничья):
-            // ход первого игрока: если человек, тогда запрашиваем координаты хода; если AI - он сам находит координаты хода
-            // проверка на победу
-            // проверка на ничью:
-                // если всё поле заполнено, но победы не было - то ничья
-            // если ничья или победа - выводим, кто победил
-            // выводим на экран состояние игрового поля
-            // ход второго игрока: если AI - он сам находит координаты хода; если человек, тогда запрашиваем координаты хода
-            // проверка на победу
-            // проверка на ничью:
-                // если всё поле заполнено, но победы не было - то ничья
-            // если ничья или победа - выводим, кто победил
-            // выводим на экран состояние игрового поля
+        // ход первого игрока: если человек, тогда запрашиваем координаты хода; если AI - он сам находит координаты хода
+        // проверка на победу
+        // проверка на ничью:
+        // если всё поле заполнено, но победы не было - то ничья
+        // если ничья или победа - выводим, кто победил
+        // выводим на экран состояние игрового поля
+        // ход второго игрока: если AI - он сам находит координаты хода; если человек, тогда запрашиваем координаты хода
+        // проверка на победу
+        // проверка на ничью:
+        // если всё поле заполнено, но победы не было - то ничья
+        // если ничья или победа - выводим, кто победил
+        // выводим на экран состояние игрового поля
 
-        while (true) {
-            player1Move();
-            printGameField();
-            if (isWin(PLAYER_1_DOT)) {
-                System.out.println("Победил Игрок 1");
+        switch (firstMove) {
+            case 0: {
+                System.out.println("Ваш ход первый!");
+                while (true) {
+                    player1Move();
+                    printGameField();
+                    if (isWin(PLAYER_1_DOT)) {
+                        System.out.println("Победил Игрок 1");
+                        break;
+                    }
+                    if (isDraw()) {
+                        System.out.println("Ничья");
+                        break;
+                    }
+                    player2Move();
+                    printGameField();
+                    if (isWin(PLAYER_2_DOT)) {
+                        System.out.println("Победил ИИ");
+                        break;
+                    }
+                    if (isDraw()) {
+                        System.out.println("Ничья");
+                        break;
+                    }
+                }
                 break;
             }
-            if (isDraw()) {
-                System.out.println("Ничья");
-                break;
-            }
-            player2Move();
-            printGameField();
-            if (isWin(PLAYER_2_DOT)) {
-                System.out.println("Победил ИИ");
-                break;
-            }
-            if (isDraw()) {
-                System.out.println("Ничья");
-                break;
+            case 1: {
+                while (true) {
+                    System.out.println("Первый ход за ИИ!");
+                    player2Move();
+                    printGameField();
+                    if (isWin(PLAYER_2_DOT)) {
+                        System.out.println("Победил ИИ");
+                        break;
+                    }
+                    if (isDraw()) {
+                        System.out.println("Ничья");
+                        break;
+                    }
+                    player1Move();
+                    printGameField();
+                    if (isWin(PLAYER_1_DOT)) {
+                        System.out.println("Победил Игрок 1");
+                        break;
+                    }
+                    if (isDraw()) {
+                        System.out.println("Ничья");
+                        break;
+                    }
+                }
             }
         }
     }
-
-
-
 }
