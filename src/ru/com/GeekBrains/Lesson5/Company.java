@@ -14,5 +14,9 @@ public class Company {
                 System.out.println(s);
             }
         }
+
+        System.out.println(employees[0].getSalary());
+        employees[0].setSalary(5000);
+        System.out.println(employees[0].getSalary());
     }
 }
