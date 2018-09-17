@@ -1,34 +1,45 @@
 package ru.com.GeekBrains.Lesson5;
 
 public class Employee {
-    private String firstName;
-    private String lastName;
-    private String position;
-    private String email;
-    private String phoneNumber;
-    private int salary;
-    private int age;
+    // поля класса Employee - все имеют максимально закрытый модификатор доступа.
+    // доступ к полям только через геттеры и сеттеры
+    private String  firstName;
+    private String  lastName;
+    private String  position;
+    private String  email;
+    private String  phoneNumber;
+    private int     salary;
+    private int     age;
 
-    Employee(String firstName, String lastName, String position, String email, String phoneNumber, int salary, int age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.position = position;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.salary = salary;
-        this.age = age;
+    // конструктор с параметрами класса Employee
+    Employee(String firstName,
+             String lastName,
+             String position,
+             String email,
+             String phoneNumber,
+             int    salary,
+             int    age) {
+        this.firstName =    firstName;
+        this.lastName =     lastName;
+        this.position =     position;
+        this.email =        email;
+        this.phoneNumber =  phoneNumber;
+        this.salary =       salary;
+        this.age =          age;
     }
 
+    // метод toString преобразует экземпляр класса и возвращает его в виде строки, а не ссылочного значения
     public String toString() {
-        return("Имя: " + firstName +
-                ", Фамилия: " + lastName +
-                ", Должность: " + position +
-                ", E-Mail: " + email +
-                ", Номер телефона: " + phoneNumber +
-                ", Зарплата: " + salary +
-                ", Возраст: " + age);
+        return("Имя: " +                this.firstName +
+                ", Фамилия: " +         this.lastName +
+                ", Должность: " +       this.position +
+                ", E-Mail: " +          this.email +
+                ", Номер телефона: " +  this.phoneNumber +
+                ", Зарплата: " +        this.salary +
+                ", Возраст: " +         this.age);
     }
 
+    // геттеры и сеттеры класса Employee
     public String getFirstName() {
         return firstName;
     }
@@ -66,7 +77,7 @@ public class Employee {
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = "+7-" + phoneNumber;
+        this.phoneNumber = phoneNumber;
     }
 
     public int getSalary() {
@@ -75,9 +86,10 @@ public class Employee {
 
     public void setSalary(int salary) {
         if (salary < 11_163) {
-            System.out.println("Невозможно установить зарплату ниже МРОТ!");
+            System.out.println("Невозможно установить зарплату " + this.position + " ниже МРОТ!");
+        } else {
+            this.salary = salary;
         }
-        this.salary = salary;
     }
 
     public int getAge() {
