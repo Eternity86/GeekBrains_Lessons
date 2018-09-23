@@ -27,7 +27,7 @@ public class Dog extends Animal {
                 ", возраст = " + this.age + " лет" +
                 ", может пробежать " + this.runDistance + " м" +
                 ", может проплыть " + this.swimDistance + " м" +
-                ", может прыгнуть на " + String.format("%.2f", this.jumpHeight) + " м" +
+                ", может подпрыгнуть на " + String.format("%.2f", this.jumpHeight) + " м" +
                '}';
     }
 

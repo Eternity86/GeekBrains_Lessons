@@ -39,9 +39,9 @@ public class Cat extends Animal {
         return swimDistance;
     }
 
-    public void setSwimDistance(float swimDistance) {
+    /*public void setSwimDistance(float swimDistance) {
         this.swimDistance = swimDistance;
-    }
+    }*/
 
     @Override
     public String toString() {
@@ -51,7 +51,7 @@ public class Cat extends Animal {
                 ", возраст = " + this.age + " лет" +
                 ", может пробежать " + this.runDistance + " м" +
                 ", не может плавать" +
-                ", может прыгнуть на " + String.format("%.2f", this.jumpHeight) + " м" +
+                ", может подпрыгнуть на " + String.format("%.2f", this.jumpHeight) + " м" +
                 '}';
     }
 
