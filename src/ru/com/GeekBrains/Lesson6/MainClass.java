@@ -19,17 +19,19 @@ public class MainClass {
             System.out.println(a);
         }
 
+        int runDistance = 456;
         for (Animal a :
                 pets) {
             if (a instanceof Dog) {
-                System.out.println(a.name + " пробежал: " + a.run(456));
+                System.out.println(a.name + " пробежал " + runDistance + " м: " + a.run(runDistance));
             }
         }
 
+        float jumpHeight = 1.6f;
         for (Animal a :
                 pets) {
             if (a instanceof Cat) {
-                System.out.println(a.name + " подпрыгнул: " + a.jump(1.6f));
+                System.out.println(a.name + " подпрыгнул на " + jumpHeight + " м: " + a.jump(1.6f));
             }
         }
 

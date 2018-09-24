@@ -62,11 +62,11 @@ public class Cat extends Animal {
 
     @Override
     public boolean run(float distance) {
-        return !(distance > this.runDistance);
+        return !(distance > this.runDistance && distance > 0);
     }
 
     @Override
     public boolean jump(float height) {
-        return !(height > this.jumpHeight);
+        return !(height > this.jumpHeight && height > 0);
     }
 }
