@@ -3,28 +3,29 @@ package ru.com.GeekBrains.Lesson7;
 public class Plate {
     private static int food;
 
+    public Plate(int n) {
+        food = n < 0 ? -n : n;
+        info();
+    }
+
     public static int getFood() {
         return food;
     }
 
-    public Plate(int food) {
-        Plate.food = food < 0 ? -food : food;
-    }
-
     boolean decreaseFood(int n) {
-        if (n > Plate.food) {
+        if (n > food) {
             return false;
-        }else {
-            Plate.food -= n;
+        } else {
+            food -= n;
             return true;
         }
     }
 
     void addFood(int n) {
-        Plate.food += n;
+        food += n < 0 ? -n : n;
     }
 
     public void info() {
-        System.out.printf("В тарелке %d единиц еды\n\n", Plate.food);
+        System.out.printf("В тарелке %d единиц еды\n\n", food);
     }
 }
