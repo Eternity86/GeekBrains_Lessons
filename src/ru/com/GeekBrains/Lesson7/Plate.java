@@ -1,14 +1,14 @@
 package ru.com.GeekBrains.Lesson7;
 
 public class Plate {
-    private static int food;
+    private int food;
 
     public Plate(int n) {
         food = n < 0 ? -n : n;
         info();
     }
 
-    public static int getFood() {
+    public int getFood() {
         return food;
     }
 
