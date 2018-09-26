@@ -34,7 +34,7 @@ public class MainClass {
         Plate plate = new Plate(new Scanner(System.in).nextInt());
 
         for (Cat c : pets) {
-            while (!c.isFullness() && Plate.getFood() >= c.getAppetite()) {     // если кот ещё не сыт и в миске лежит больше, чем кот съедает за раз -
+            while (!c.isFullness() && plate.getFood() >= c.getAppetite()) {     // если кот ещё не сыт и в миске лежит больше, чем кот съедает за раз -
                 c.eat(plate);                                                   // кот ест из тарелки
                 plate.info();
             }
