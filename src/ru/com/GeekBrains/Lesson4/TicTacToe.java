@@ -79,7 +79,7 @@ public class TicTacToe {
 
     public static boolean isWin(char playerDot) {
         int hor, ver;
-        int diagMain = 0, diagReverse = 0;
+        int diagMain, diagReverse;
         for (int i = 0; i < FIELD_SIZE; i++) {
             hor = 0;
             ver = 0;
@@ -96,11 +96,13 @@ public class TicTacToe {
                 }
             }
             if (hor >= DOTS_TO_WIN || ver >= DOTS_TO_WIN) {
+                System.out.println("По горизонтали или вертикали " + hor + " " + ver);
                 return true;
             }
         }
 
         for (int j = 0; j < FIELD_SIZE; j++) {
+            diagMain = 0;
             for (int i = 0; i < FIELD_SIZE; i++) {
                 int k = j + i;
                 if (k < FIELD_SIZE) {
@@ -111,11 +113,13 @@ public class TicTacToe {
                     }
                 }
                 if (diagMain >= DOTS_TO_WIN) {
+                    System.out.println("По главной диагонали от центральной оси вправо " + diagMain);
                     return true;
                 }
             }
         }
         for (int j = 1; j < FIELD_SIZE; j++) {
+            diagMain = 0;
             for (int i = 0; i < FIELD_SIZE; i++) {
                 int k = j + i;
                 if (k < FIELD_SIZE) {
@@ -126,11 +130,13 @@ public class TicTacToe {
                     }
                 }
                 if (diagMain >= DOTS_TO_WIN) {
+                    System.out.println("По главной диагонали от центральной оси вниз " + diagMain);
                     return true;
                 }
             }
         }
         for (int j = 0; j < FIELD_SIZE; j++) {
+            diagReverse = 0;
             for (int i = 0; i < FIELD_SIZE; i++) {
                 int k = (FIELD_SIZE - 1) - i;
                 int l = j + i;
@@ -142,11 +148,13 @@ public class TicTacToe {
                     }
                 }
                 if (diagReverse >= DOTS_TO_WIN) {
+                    System.out.println("По побочной диагонали от центральной оси вниз " + diagReverse);
                     return true;
                 }
             }
         }
         for (int j = 1; j < FIELD_SIZE; j++) {
+            diagReverse = 0;
             for (int i = 0; i < FIELD_SIZE; i++) {
                 int k = (FIELD_SIZE - 1) - j - i;
                 if (k >= 0) {
@@ -157,6 +165,7 @@ public class TicTacToe {
                     }
                 }
                 if (diagReverse >= DOTS_TO_WIN) {
+                    System.out.println("По побочной диагонали от центральной оси влево " + diagReverse);
                     return true;
                 }
             }
@@ -179,23 +188,8 @@ public class TicTacToe {
         initGameField();                    // инициализируем игровое поле - создаём "пустой" двумерный массив
         System.out.printf("Цель игры - заполнить подряд линию по вертикали, горизонтали или диагонали из %d Ваш%s символ%s.\n", DOTS_TO_WIN, (DOTS_TO_WIN % 10 == 1 && DOTS_TO_WIN % 100 != 11) ? "его" : "их", (DOTS_TO_WIN % 10 == 1 && DOTS_TO_WIN % 100 != 11) ? "а" : "ов");
         printGameField();                   // выводим состояние начального поля в консоль
-        int firstMove = new Random().nextInt(2);
 
-        // в бесконечном цикле (повторяем, пока не найдётся либо победитель, либо ничья):
-        // ход первого игрока: если человек, тогда запрашиваем координаты хода; если AI - он сам находит координаты хода
-        // проверка на победу
-        // проверка на ничью:
-        // если всё поле заполнено, но победы не было - то ничья
-        // если ничья или победа - выводим, кто победил
-        // выводим на экран состояние игрового поля
-        // ход второго игрока: если AI - он сам находит координаты хода; если человек, тогда запрашиваем координаты хода
-        // проверка на победу
-        // проверка на ничью:
-        // если всё поле заполнено, но победы не было - то ничья
-        // если ничья или победа - выводим, кто победил
-        // выводим на экран состояние игрового поля
-
-        switch (firstMove) {
+        switch (new Random().nextInt(2)) {
             case 0: {
                 System.out.println("Ваш ход первый!");
                 while (true) {
@@ -223,8 +217,8 @@ public class TicTacToe {
                 break;
             }
             case 1: {
+                System.out.println("Первый ход за ИИ!");
                 while (true) {
-                    System.out.println("Первый ход за ИИ!");
                     player2Move();
                     printGameField();
                     if (isWin(PLAYER_2_DOT)) {
