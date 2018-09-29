@@ -1,4 +1,4 @@
-package ru.com.GeekBrains.Lesson8.TicTacToe_Swing;
+package ru.com.GeekBrains.TicTacToe;
 
 import javax.swing.*;
 import java.awt.*;
@@ -214,7 +214,7 @@ public class MainGameField extends JPanel {
             g.setColor(Color.BLACK);
             g.fillRect(0, FIELD_SIZE / 2, FIELD_SIZE, FIELD_SIZE / 8);
             g.setColor(Color.RED);
-            g.setFont(new Font("Tahoma", 10, 40));
+            g.setFont(new Font("Tahoma", Font.BOLD, 40));
             g.drawString(gameOverMessage, 0, 19 * FIELD_SIZE / 32);
         }
     }

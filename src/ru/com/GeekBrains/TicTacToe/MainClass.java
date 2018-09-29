@@ -1,4 +1,4 @@
-package ru.com.GeekBrains.Lesson8.TicTacToe_Swing;
+package ru.com.GeekBrains.TicTacToe;
 
 public class MainClass {
     public static void main(String[] args) {

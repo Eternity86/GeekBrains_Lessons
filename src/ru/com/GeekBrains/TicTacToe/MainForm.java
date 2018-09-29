@@ -1,4 +1,4 @@
-package ru.com.GeekBrains.Lesson8.TicTacToe_Swing;
+package ru.com.GeekBrains.TicTacToe;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package ru.com.GeekBrains.Lesson8.TicTacToe_Swing;
+package ru.com.GeekBrains.TicTacToe;
 
 public class Player extends AGamer{
     MainGameField gameField;
