@@ -1,7 +1,5 @@
 package ru.com.GeekBrains.Lesson8;
 
-import ru.com.GeekBrains.Lesson8.Map;
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -9,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class StartNewGameWindow extends JFrame {
+public class StartNewGameWindow extends JDialog {
 
     private final GameWindow gameWindow;
     private static final int WIN_HEIGHT = 230;
@@ -18,25 +16,26 @@ public class StartNewGameWindow extends JFrame {
     private static final int MIN_FIELD_SIZE = 3;
     private static final int MAX_WIN_LEN = 10;
     private static final int MAX_FIELD_SIZE = 10;
-    private static final String STR_WIN_LEN = "Winning Len: ";
-    private static final String STR_FILED_SIZE = "Field Size: ";
+    private static final String STR_WIN_LEN = "Победная серия: ";
+    private static final String STR_FILED_SIZE = "Размер поля: ";
 
-    private JRadioButton jrbHumVsAi = new JRadioButton("Human vs Ai", true);
-    private JRadioButton jrbHumVsHum = new JRadioButton("Human vs Human");
+    private JRadioButton jrbHumVsAi = new JRadioButton("Игрок против ИИ", true);
+    private JRadioButton jrbHumVsHum = new JRadioButton("Игрок против Игрока");
     private ButtonGroup gameMode = new ButtonGroup();
 
     private JSlider slFieldSize;
-    private JSlider slWinLeght;
+    private JSlider slWinLenght;
 
 
     public StartNewGameWindow(GameWindow gameWindow) {
         this.gameWindow = gameWindow;
-        setTitle("new game param!");
+        setModal(true);
+        setTitle("Настройки новой игры!");
         setSize(WIN_WIDTH, WIN_HEIGHT);
 
         Rectangle gameWindowBounds = gameWindow.getBounds();
-        int posX = (int) (gameWindowBounds.getCenterX() - WIN_WIDTH/2);
-        int posY = (int) (gameWindowBounds.getCenterY() - WIN_HEIGHT/2);
+        int posX = (int) (gameWindowBounds.getCenterX() - WIN_WIDTH / 2);
+        int posY = (int) (gameWindowBounds.getCenterY() - WIN_HEIGHT / 2);
 
         setLocation(posX, posY);
         setLayout(new GridLayout(10,1));
@@ -44,7 +43,7 @@ public class StartNewGameWindow extends JFrame {
         addGameControlsMode();
         addGameControlsFieldWinLen();
 
-        JButton btnStartGame = new JButton("Start a game");
+        JButton btnStartGame = new JButton("Начать игру!");
         btnStartGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -55,7 +54,7 @@ public class StartNewGameWindow extends JFrame {
 
     }
 
-    void btnStartGame() {
+    private void btnStartGame() {
         int gameMode;
         if(jrbHumVsAi.isSelected()) {
             gameMode = Map.MODE_H_V_A;
@@ -64,21 +63,21 @@ public class StartNewGameWindow extends JFrame {
         }
 
         int fieldSize = slFieldSize.getValue();
-        int winLen = slWinLeght.getValue();
+        int winLen = slWinLenght.getValue();
         gameWindow.startNewGame(gameMode, fieldSize, fieldSize, winLen);
         setVisible(false);
     }
 
     private void addGameControlsMode() {
-        add(new JLabel("Choose gaming mode"));
+        add(new JLabel("Выбрать игровой режим"));
         gameMode.add(jrbHumVsAi);
         gameMode.add(jrbHumVsHum);
         add(jrbHumVsAi);
         add(jrbHumVsHum);
     }
 
-    void addGameControlsFieldWinLen() {
-        add(new JLabel("Choose field size"));
+    private void addGameControlsFieldWinLen() {
+        add(new JLabel("Выбрать размер поля"));
         final JLabel lblFieldSize = new JLabel(STR_FILED_SIZE + MIN_FIELD_SIZE);
         add(lblFieldSize);
 
@@ -88,26 +87,22 @@ public class StartNewGameWindow extends JFrame {
             public void stateChanged(ChangeEvent e) {
                 int currentFieldSize = slFieldSize.getValue();
                 lblFieldSize.setText(STR_FILED_SIZE + currentFieldSize);
-                slWinLeght.setMaximum(currentFieldSize);
+                slWinLenght.setMaximum(currentFieldSize);
             }
         });
         add(slFieldSize);
 
-        add(new JLabel("Choose win len: "));
+        add(new JLabel("Длина победной серии: "));
         final JLabel lblWinLen = new JLabel(STR_WIN_LEN + MIN_WIN_LEN);
         add(lblWinLen);
 
-        slWinLeght = new JSlider(MIN_WIN_LEN, MAX_WIN_LEN, MIN_WIN_LEN);
-        slWinLeght.addChangeListener(new ChangeListener() {
+        slWinLenght = new JSlider(MIN_WIN_LEN, slFieldSize.getValue(), MIN_WIN_LEN);
+        slWinLenght.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                lblWinLen.setText(STR_WIN_LEN + slWinLeght.getValue());
+                lblWinLen.setText(STR_WIN_LEN + slWinLenght.getValue());
             }
         });
-        add(slWinLeght);
-
+        add(slWinLenght);
     }
-
-
-
 }
