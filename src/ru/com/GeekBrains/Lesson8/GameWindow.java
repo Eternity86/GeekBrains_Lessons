@@ -19,15 +19,15 @@ public class GameWindow extends JFrame {
     private static StartNewGameWindow startNewGameWindow;
 
     public GameWindow() {
-        setTitle("TicTacToe");
+        setTitle("Крестики-Нолики");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(WIN_POS_X, WIN_POS_Y, WIN_WIDTH, WIN_HEIGHT);
         setResizable(false);
 
         JPanel bottomPanel = new JPanel(new GridLayout(1, 2));
 
-        JButton btnNewGame = new JButton("Start new game");
-        JButton btnExit = new JButton("Exit");
+        JButton btnNewGame = new JButton("Начать новую игру");
+        JButton btnExit = new JButton("Выход");
 
         startNewGameWindow = new StartNewGameWindow(this);
 
@@ -37,7 +37,6 @@ public class GameWindow extends JFrame {
         btnNewGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //System.out.println("Start new game");
                 startNewGameWindow.setVisible(true);
             }
         });
