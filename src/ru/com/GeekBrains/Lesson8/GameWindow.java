@@ -10,12 +10,12 @@ import java.awt.event.ActionListener;
 public class GameWindow extends JFrame {
 
     // 1 данные основного окна
-    private static final int WIN_HEIGHT = 555;
-    private static final int WIN_WIDTH = 507;
-    private static final int WIN_POS_X = 800;
-    private static final int WIN_POS_Y = 300;
+    private static final int WIN_HEIGHT = 560;
+    private static final int WIN_WIDTH = 510;
+    private static final int WIN_POS_X = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - WIN_WIDTH / 2;
+    private static final int WIN_POS_Y = Toolkit.getDefaultToolkit().getScreenSize().height / 2 - WIN_HEIGHT / 2;
 
-    private static Map field;
+    private static Map gameField;
     private static StartNewGameWindow startNewGameWindow;
 
     public GameWindow() {
@@ -48,34 +48,15 @@ public class GameWindow extends JFrame {
             }
         });
 
-        field = new Map();
-        add(field, BorderLayout.CENTER);
+        gameField = new Map();
+        add(gameField, BorderLayout.CENTER);
 
         add(bottomPanel, BorderLayout.SOUTH);
         setVisible(true);
     }
 
 
-    void startNewGame(int mode, int filedSizeX, int filedSizeY, int winLen) {
-        field.startNewGame(mode, filedSizeX, filedSizeY, winLen);
+    void startNewGame(int mode, int fieldSizeX, int fieldSizeY, int winLen) {
+        gameField.startNewGame(mode, fieldSizeX, fieldSizeY, winLen);
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-//        Toolkit toolkit = Toolkit.getDefaultToolkit();
-//        Dimension screenSize = toolkit.getScreenSize();
-//        int sH = screenSize.height;
-//        int sW = screenSize.width;
-//
-//        setSize(sH/2, sW/2);
