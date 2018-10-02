@@ -8,20 +8,20 @@ import java.util.Random;
 
 class Map extends JPanel{
 
-    private static final int GAME_MODE_H_VS_AI = 0;
-    private static final int GAME_MODE_H_VS_H = 1;
+    private static final int GAME_MODE_H_VS_AI =    0;
+    private static final int GAME_MODE_H_VS_H =     1;
 
-    private static final int DOT_EMPTY = 0;
-    private static final int DOT_X = 1;
-    private static final int DOT_O = 2;
+    private static final int DOT_EMPTY =    0;
+    private static final int DOT_X =        1;
+    private static final int DOT_O =        2;
 
-    private static final int STATE_DRAW = 0;
-    private static final int STATE_X_WIN = 1;
-    private static final int STATE_O_WIN = 2;
+    private static final int STATE_DRAW =   0;
+    private static final int STATE_X_WIN =  1;
+    private static final int STATE_O_WIN =  2;
     private int stateGameOver;
     private int stateGameMode;
 
-    private static final String MSG_DRAW = "Ничья!";
+    private static final String MSG_DRAW =  "Ничья!";
     private static final String MSG_X_WIN = "Победил игрок_X!";
     private static final String MSG_O_WIN = "Победил игрок_O!";
     private boolean moveX = true;
@@ -29,20 +29,22 @@ class Map extends JPanel{
 
 
     private final Random random = new Random();
-    private final Font font = new Font("Times new roman", Font.BOLD, 48);
+    private final Font font = new Font("Times New Roman", Font.BOLD, 48);
 
     private int[][] gameField;
     private int winLength;
     private int fieldSizeX, fieldSizeY;
     private int cellWidth, cellHeight;
     private int cellX, cellY;
-    private boolean initialized;
+    private boolean initialized = false;
     private boolean gameOver;
 
 
     Map(){
         setBackground(Color.WHITE);
+        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
+
     void startNewGame(int mode, int fieldSizeX, int fieldSizeY, int winLength){
         this.stateGameMode = mode;
         this.fieldSizeX = fieldSizeX;
@@ -93,38 +95,43 @@ class Map extends JPanel{
     }
 
     private void modeHvsAi () {
-        if(!isValidCell(cellX, cellY) || !isEmptyCell(cellY, cellX)) return;
-        gameField[cellX][cellY] = DOT_X;
-        if(checkWin(DOT_X)) {
+        if (!isValidCell(cellX, cellY) || !isEmptyCell(cellY, cellX)) {
+            return;
+        } else {
+            gameField[cellX][cellY] = DOT_X;
+        }
+        if (checkWin(DOT_X)) {
             stateGameOver = STATE_X_WIN;
             gameOver = true;
             return;
         }
-        if(isMapFull()) {
+        if (isMapFull()) {
             stateGameOver = STATE_DRAW;
             gameOver = true;
             return;
         }
-        aiMove();
         repaint();
-        if(checkWin(DOT_O)) {
+        aiMove();
+        if (checkWin(DOT_O)) {
             stateGameOver = STATE_O_WIN;
             gameOver = true;
             return;
         }
-        if(isMapFull()) {
+        if (isMapFull()) {
             stateGameOver = STATE_DRAW;
             gameOver = true;
             return;
         }
+        repaint();
     }
 
     private void modeHvsH() {
-
-        if(isValidCell(cellX, cellY) && isEmptyCell(cellY, cellX) && moveX) {
+        if (!isValidCell(cellX, cellY) || !isEmptyCell(cellY, cellX)) {
+            return;
+        } else if (moveX) {
             gameField[cellX][cellY] = DOT_X;
-            moveX = false;
-            moveO = true;
+            moveX = !moveX;
+            moveO = !moveO;
         }
         if(checkWin(DOT_X)) {
             stateGameOver = STATE_X_WIN;
@@ -137,10 +144,12 @@ class Map extends JPanel{
             return;
         }
         repaint();
-        if(isValidCell(cellX, cellY) && isEmptyCell(cellY, cellX) && moveO) {
+        if (!isValidCell(cellX, cellY) || !isEmptyCell(cellY, cellX)) {
+            return;
+        } else if (moveO) {
             gameField[cellX][cellY] = DOT_O;
-            moveO = false;
-            moveX = true;
+            moveO = !moveO;
+            moveX = !moveX;
         }
         if(checkWin(DOT_O)) {
             stateGameOver = STATE_O_WIN;
@@ -205,10 +214,10 @@ class Map extends JPanel{
                 g.drawString(MSG_DRAW, 180, getHeight() / 2);
                 break;
             case STATE_X_WIN:
-                g.drawString(MSG_X_WIN, 70, getHeight() / 2);
+                g.drawString(MSG_X_WIN, 45, getHeight() / 2);
                 break;
             case STATE_O_WIN:
-                g.drawString(MSG_O_WIN, 20, getHeight() / 2);
+                g.drawString(MSG_O_WIN, 45, getHeight() / 2);
                 break;
             default:
                 throw new RuntimeException("Неожиданное состояние конца игры: " + stateGameOver);
