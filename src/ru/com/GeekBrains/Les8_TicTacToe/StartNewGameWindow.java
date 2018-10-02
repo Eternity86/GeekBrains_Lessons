@@ -86,11 +86,11 @@ class StartNewGameWindow extends JDialog{
         add(slideFieldSizeX);
         //add(lbFieldSizeY);
         //add(slideFieldSizeY);
+        add(lbEmpty1); // пустые метки-заглушки вместо слайдера выбора размера поля по Y
+        add(lbEmpty2);
         add(new JLabel("Укажите победную серию"));
         add(lbWinLength);
         add(slideWinLength);
-        add(lbEmpty1);
-        add(lbEmpty2);
     }
 
     private void btnStartGame_OnClick(){
