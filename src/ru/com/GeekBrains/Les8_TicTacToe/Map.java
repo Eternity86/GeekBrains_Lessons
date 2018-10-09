@@ -65,11 +65,11 @@ class Map extends JPanel{
         repaint();
     }
 
-    public static int getGameModeHvsAi() {
+    static int getGameModeHvsAi() {
         return GAME_MODE_H_VS_AI;
     }
 
-    public static int getGameModeHvsH() {
+    static int getGameModeHvsH() {
         return GAME_MODE_H_VS_H;
     }
 
@@ -182,15 +182,17 @@ class Map extends JPanel{
             g.drawLine(x, 0, x, panelHeight);
         }
 
-        // рисуем крестики и нолики
         for (int i = 0; i < fieldSizeX; i++) {
             for (int j = 0; j < fieldSizeY; j++) {
                 if (gameField[i][j] != DOT_EMPTY) {
+                    // рисуем крестики
                     if (gameField[i][j] == DOT_X) {
                         g.setColor(Color.RED);
                         g.drawLine((i * cellWidth) + 10, (j * cellHeight) + 10, (i + 1) * cellWidth - 10, (j + 1) * cellHeight - 10);
                         g.drawLine((i + 1) * cellWidth - 10, (j * cellHeight) + 10, (i * cellWidth) + 10, (j + 1) * cellHeight - 10);
-                    } else if (gameField[i][j] == DOT_O) {
+                    }
+                    // рисуем нолики
+                    else if (gameField[i][j] == DOT_O) {
                         g.setColor(Color.BLUE);
                         g.drawOval((i * cellWidth) + 10, (j * cellHeight) + 10, cellWidth - 20, cellHeight - 20);
                     } else {
