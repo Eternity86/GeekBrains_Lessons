@@ -87,7 +87,7 @@ class StartNewGameWindow extends JDialog{
         //add(lbFieldSizeY);
         //add(slideFieldSizeY);
         add(lbEmpty1); // пустые метки-заглушки вместо слайдера выбора размера поля по Y
-        add(lbEmpty2);
+        add(lbEmpty2); // при решении проблемы с разной размерностью поля - удалить эти две метки и раскомментированть метку и слайдер
         add(new JLabel("Укажите победную серию"));
         add(lbWinLength);
         add(slideWinLength);
